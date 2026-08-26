@@ -1,0 +1,512 @@
+body {
+  background-color: hsl(0, 0%, 23%);
+  margin: 0;
+  padding-top: 80px;
+  width: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  font-family: "SuisseIntl-Medium", sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+  color: white;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+  margin-left: -20px;
+  /* border: 1px solid hsl(240, 3%, 25%); */
+  border-radius: 5px;
+
+  margin-bottom: 32px;
+  overflow: hidden;
+
+  align-items: flex-start;
+  position: relative;
+}
+
+.infos {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: stretch;
+}
+
+.column {
+  flex: 50%;
+}
+
+.infos p {
+  border-top: 1px solid rgb(50, 50, 50);
+  /* background-color: hsla(0, 0%, 100%, .02); */
+  padding-top: 0.5rem;
+}
+
+.half {
+  display: inline-block;
+  max-width: 425px;
+}
+
+.title {
+  /* background-color: hsla(240, 3%, 15%, 0.85); */
+}
+
+.svg {
+  background-color: hsla(120, 14%, 29%, 0.85);
+}
+
+.files {
+  background-color: rgba(33, 45, 100, 0.85);
+}
+
+.results {
+  background-color: hsla(0, 0%, 44%, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  z-index: 1;
+  height: auto;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding-top: 0;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+
+  transition: all 0.3s;
+}
+
+.results li {
+  background-color: rgb(206, 206, 206);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+
+  text-align: center;
+  line-height: 0.9rem;
+  color: black;
+  /* width: 120px;
+  height: 120px;   */
+  width: 10vw;
+  height: 10vw;
+  min-width: 6rem;
+  min-height: 6rem;
+
+  padding: 1.5vw;
+  margin-left: 2vw;
+  border-radius: 50%;
+  text-transform: uppercase;
+}
+
+.results li:first-child {
+  background-color: rgb(242, 255, 99);
+  margin-left: 0px;
+  display: none;
+}
+.results li:nth-child(2) {
+  background-color: rgb(99, 211, 255);
+}
+.results li:nth-child(3) {
+  background-color: rgb(229, 128, 240);
+}
+.results li:nth-child(4) {
+  background-color: rgb(255, 180, 99);
+}
+.results li:nth-child(5) {
+  background-color: rgb(99, 255, 187);
+}
+.results li:nth-child(6) {
+  background-color: rgb(243, 118, 155);
+}
+.results li:nth-child(7) {
+  background-color: rgb(211, 255, 99);
+}
+.results li:nth-child(8) {
+  display: none;
+  background-color: rgb(211, 255, 99);
+}
+
+.gl {
+  background-color: hsla(140, 47%, 37%, 0.5);
+}
+
+.qr {
+  color: white;
+  position: fixed;
+  right: 20px;
+  top: 20px;
+
+  background-image: url("../links/qr-clients-delcourt.svg");
+  background-repeat: no-repeat;
+  background-size: cover; /* Adjust as needed */
+  width: 128px; /* Example width */
+  height: 128px; /* Example height */
+  opacity: 0.5;
+}
+
+h1 {
+  font-family: "SuisseIntl-Medium", sans-serif;
+  font-weight: normal;
+  font-size: 32px;
+  line-height: 34px;
+  color: white;
+  margin: 6px;
+  margin-bottom: 18px;
+}
+
+.disabled {
+  /* border-color: #dddddd; */
+  /* color: #dddddd; */
+  pointer-events: none;
+  opacity: 0.25;
+}
+
+h2 {
+  font-family: "SuisseIntl-Medium", sans-serif;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 22px;
+  color: white;
+  margin: 6px;
+  margin-bottom: 18px;
+}
+
+p {
+  font-family: "SuisseIntl-Medium", sans-serif;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: rgb(104, 104, 104);
+  margin: 6px;
+  max-width: 80vw;
+}
+
+strong {
+  color: rgb(167, 167, 167);
+  font-weight: normal;
+}
+
+.bottomRight {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  opacity: 0.4;
+}
+
+.danger {
+  border-color: #ff7d7d;
+  color: #fc7979;
+}
+
+.custom {
+  background-color: hsla(118, 20%, 35%, 0.85);
+}
+
+/* Custom  */
+
+ul {
+  /* background-color: red; */
+  width: auto;
+  list-style-type: none;
+  display: contents;
+  margin-right: 0;
+  padding: 0;
+}
+
+ul li {
+  background-color: rgb(161, 179, 255);
+  height: 64px;
+  margin-top: 20px;
+  margin-right: 0;
+  padding: 0;
+  display: flex;
+  border-radius: 4px;
+
+  font-family: "SuisseIntl-Medium", sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+  /* font-size: clamp(1.5vw, 16px, 16px); */
+}
+
+ul li a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+}
+
+#show-id {
+  width: 100%;
+  height: 2rem;
+}
+
+input {
+  width: 100%;
+  font-family: "SuisseIntl-Medium", sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+  padding: 4px;
+  background-color: transparent;
+  border: 1px solid #999999;
+  color: white;
+}
+
+textarea {
+  border: 1px solid #999999;
+  width: 100%;
+  margin: 0;
+  background-color: transparent;
+  color: white;
+  border: none;
+}
+
+#devArea {
+  visibility: hidden;
+}
+
+#choices {
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+}
+
+#choices li {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* NavControl */
+
+#navControl {
+  margin-top: 64px;
+}
+
+.button {
+  display: block;
+  border: 1px solid #979797;
+  border-radius: 8px;
+  box-sizing: border-box;
+  cursor: pointer;
+  /* display: inline-block; */
+  font-family: "SuisseIntl-Medium", sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  margin: 6px 0 6px 0;
+  outline: none;
+  padding: 24px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  touch-action: manipulation;
+  transition: box-shadow 0.2s, -ms-transform 0.1s, -webkit-transform 0.1s,
+    transform 0.1s;
+  user-select: none;
+  -webkit-user-select: none;
+  width: 100%;
+  
+}
+
+.button.choice {
+}
+
+.button.choice:hover {
+    transform: scale(1.02);
+
+}
+
+
+.button:focus-visible {
+  box-shadow: #222222 0 0 0 2px, rgba(255, 255, 255, 0.8) 0 0 0 4px;
+  transition: box-shadow 0.2s;
+}
+
+.button:hover {
+  background-color: hsl(213, 72%, 55%);
+  color: white;
+  border: 1px solid hsla(240, 3%, 45%, 0);
+  transform: scale(1.02);
+}
+
+.button:active {
+  background-color: hsl(0, 0%, 17%);
+  border-color: #fff;
+  transform: scale(0.96);
+}
+
+.button.disabled {
+  border-color: #dddddd;
+  color: #dddddd;
+  pointer-events: none;
+  opacity: 0.25;
+}
+
+.back {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.restart {
+  width: 100%;
+  background-color: rgb(255, 174, 174);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.validate {
+  width: 100%;
+  background-color: rgb(114, 255, 114);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* margin-top: 24px; */
+}
+
+#finalChoice {
+  display: none;
+}
+
+/* ------ Viewport is Mobile phone ---------- */
+
+@media only screen and (max-width: 600px) {
+  .column {
+    flex: 100%;
+  }
+
+  body {
+    padding: 15px;
+    padding-top: 0px;
+  }
+
+  .qr {
+    display: none;
+  }
+}
+
+/* ------ Viewport is horizontal ---------- */
+
+@media (orientation: landscape) {
+  .wrapper {
+    align-items: flex-start;
+  }
+}
+
+/* ------ Viewport is vertical ---------- */
+
+@media (orientation: portrait) {
+  .results {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .title {
+    margin-top: 0;
+    border-radius: 0;
+  }
+
+  .wrapper {
+    margin-bottom: 0;
+  }
+
+  .choices {
+    display:flex;
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .button {
+    /* max-height: 3vh; */
+    /* width: 40%; */
+  }
+
+  #navControl {
+    margin-top: 0;
+  }
+
+}
+
+/* ------ Physics Canvas ---------- */
+
+#physicsCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 5; /* Above background but below main UI */
+  pointer-events: none;
+  display: none; /* Hidden by default */
+  border: 2px solid red; /* Debug: visible border */
+}
+
+/* ------ Physics Toggle Button ---------- */
+
+.toggle-button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  
+  background-color: hsla(0, 0%, 20%, 0.9);
+  color: white;
+  border: 2px solid hsla(0, 0%, 40%, 0.8);
+  border-radius: 25px;
+  padding: 12px 24px;
+  
+  font-family: "SuisseIntl-Medium", sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.toggle-button:hover {
+  background-color: hsla(0, 0%, 30%, 0.95);
+  border-color: hsla(0, 0%, 60%, 1);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.toggle-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.toggle-button.active {
+  background-color: hsla(142, 71%, 45%, 0.9);
+  border-color: hsla(142, 71%, 65%, 1);
+}
+
+.toggle-button.active:hover {
+  background-color: hsla(142, 71%, 55%, 0.95);
+}
+
+.toggle-label {
+  display: inline-block;
+}
+
+/* Ensure main content is above canvas */
+main {
+  position: relative;
+  z-index: 10;
+}
+
+

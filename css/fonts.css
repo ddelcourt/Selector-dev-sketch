@@ -1,0 +1,21 @@
+/* Import fonts*/
+
+/* @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap"); */
+/* @import url("https://rsms.me/inter/inter.css");
+@supports (font-variation-settings: normal) {
+} */
+
+/**---Fonts------------------------*/
+@font-face {
+  font-family: "SuisseIntl-Regular";
+  font-weight: normal;
+  src: url("fonts/SuisseIntl-Regular-WebXL.woff") format("woff"),
+    url("fonts/SuisseIntl-Regular-WebXL.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "SuisseIntl-Medium";
+  font-weight: normal;
+  src: url("fonts/SuisseIntl-Medium-WebXL.woff") format("woff"),
+    url("fonts/SuisseIntl-Medium-WebXL.woff2") format("woff2");
+}

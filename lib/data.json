@@ -1,0 +1,204 @@
+{
+  "initial": ["start"],
+
+  "choices": {
+    "start": {
+      "choice": "Start",
+      "stepTitle": "Welcome",
+      "children": ["blog", "synthesis", "popularization", "indepth", "video"]
+    },
+
+    "blog": {
+      "choice": "Blog post",
+      "stepTitle": "Characteristics",
+      "children": ["individual", "pressmedia", "institution", "business"]
+    },
+
+    "synthesis": {
+      "choice": "Editorial synthesis",
+      "stepTitle": "Characteristics",
+      "children": ["individual", "pressmedia", "institution", "business"]
+    },
+
+    "popularization": {
+      "choice": "Popularization",
+      "stepTitle": "Characteristics",
+      "children": ["individual", "pressmedia", "institution", "business"]
+    },
+
+    "indepth": {
+      "choice": "In-depth article",
+      "stepTitle": "Characteristics",
+      "children": ["individual", "pressmedia", "institution", "business"]
+    },
+
+    "video": {
+      "choice": "Audio/Video",
+      "stepTitle": "Characteristics",
+      "children": ["individual", "pressmedia", "institution", "business"]
+    },
+
+    "individual": {
+      "choice": "Individual",
+      "stepTitle": "Source Type",
+      "children": [
+        "art",
+        "science",
+        "history",
+        "politics",
+        "commerce",
+        "entertainment"
+      ]
+    },
+    "pressmedia": {
+      "choice": "Journalism",
+      "stepTitle": "Source Type",
+      "children": [
+        "art",
+        "science",
+        "history",
+        "politics",
+        "commerce",
+        "entertainment"
+      ]
+    },
+    "institution": {
+      "choice": "Institution",
+      "stepTitle": "Source Type",
+      "children": [
+        "art",
+        "science",
+        "history",
+        "politics",
+        "commerce",
+        "entertainment"
+      ]
+    },
+    "business": {
+      "choice": "Business",
+      "stepTitle": "Source Type",
+      "children": [
+        "art",
+        "science",
+        "history",
+        "politics",
+        "commerce",
+        "entertainment"
+      ]
+    },
+
+    "art": {
+      "choice": "Art",
+      "stepTitle": "Field Type",
+      "children": ["funny", "serious", "catchy", "sad"]
+    },
+    "science": {
+      "choice": "Science",
+      "stepTitle": "Field Type",
+      "children": ["funny", "serious", "catchy", "sad"]
+    },
+    "history": {
+      "choice": "History",
+      "stepTitle": "Field Type",
+      "children": ["funny", "serious", "catchy", "sad"]
+    },
+    "politics": {
+      "choice": "Politics",
+      "stepTitle": "Field Type",
+      "children": ["funny", "serious", "catchy", "sad"]
+    },
+    "entertainment": {
+      "choice": "Entertainment",
+      "stepTitle": "Field Type",
+      "children": ["funny", "serious", "catchy", "sad"]
+    },
+    "commerce": {
+      "choice": "Business",
+      "stepTitle": "Field Type",
+      "children": ["funny", "serious", "catchy", "sad"]
+    },
+
+    "funny": {
+      "choice": "Funny",
+      "stepTitle": "Characterization",
+      "children": ["true", "false", "inaccurate", "sales-oriented"]
+    },
+    "serious": {
+      "choice": "Serious",
+      "stepTitle": "Characterization",
+      "children": ["true", "false", "inaccurate", "sales-oriented"]
+    },
+    "sad": {
+      "choice": "Sad",
+      "stepTitle": "Characterization",
+      "children": ["true", "false", "inaccurate", "sales-oriented"]
+    },
+    "catchy": {
+      "choice": "Catchy",
+      "stepTitle": "Characterization",
+      "children": ["true", "false", "inaccurate", "sales-oriented"]
+    },
+
+    "true": {
+      "choice": "True",
+      "stepTitle": "What will experts think?",
+      "children": ["verifiable", "opinion", "selfpromo"]
+    },
+    "false": {
+      "choice": "False",
+      "stepTitle": "What will experts think?",
+      "children": ["biased", "rumor", "misleading", "harmful"]
+    },
+    "inaccurate": {
+      "choice": "Inaccurate",
+      "stepTitle": "What will experts think?",
+      "children": ["biased", "rumor", "misleading"]
+    },
+    "sales-oriented": {
+      "choice": "Sales-oriented",
+      "stepTitle": "What will experts think?",
+      "children": ["verifiable", "biased", "selfpromo", "misleading"]
+    },
+
+    "verifiable": {
+      "choice": "Verifiable",
+      "stepTitle": "Because it's...",
+      "children": ["end"]
+    },
+    "opinion": {
+      "choice": "An Opinion",
+      "stepTitle": "Because it's...",
+      "children": ["end"]
+    },
+    "biased": {
+      "choice": "Biased",
+      "stepTitle": "Because it's...",
+      "children": ["end"]
+    },
+    "selfpromo": {
+      "choice": "Self-promo",
+      "stepTitle": "Because it's...",
+      "children": ["end"]
+    },
+    "rumor": {
+      "choice": "A Rumor",
+      "stepTitle": "Because it's...",
+      "children": ["end"]
+    },
+    "misleading": {
+      "choice": "Misleading",
+      "stepTitle": "Because it's...",
+      "children": ["end"]
+    },
+    "harmful": {
+      "choice": "Harmful",
+      "stepTitle": "Because it's...",
+      "children": ["end"]
+    },
+
+    "end": {
+      "choice": "Thank you!",
+      "stepTitle": "All done"
+    }
+  }
+}

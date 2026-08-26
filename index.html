@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-control" content="max-age=3600" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <title>Descriptors selection</title>
+
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/animate.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <script>
+      window.jQuery ||
+        document.write('<script src="js/jquery.min.js"><\/script>');
+    </script>
+
+    <!-- Matter.js Physics Engine -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+
+    <script src="lib/showHide.js"></script>
+    <script src="lib/physics.js"></script>
+
+    <script type="module">
+      import { DecisionTree } from "/lib/decisionTree.js";
+
+      // Initialize on page load
+      async function init() {
+        try {
+          const data = await (await fetch("./lib/data.json")).json();
+          
+          // Save to local storage
+          localStorage.setItem('decisionTreeData', JSON.stringify(data));
+          console.log('Data saved to localStorage');
+          
+          const tree = new DecisionTree(data);
+          console.log('DecisionTree initialized:', tree);
+          console.log("DecisionTree defined:", typeof DecisionTree);
+        } catch (error) {
+          console.error("Error loading data:", error);
+        }
+      }
+      
+      // Call init when page loads
+      window.addEventListener('DOMContentLoaded', init);
+    </script>
+  </head>
+
+  <body>
+    <!-- Physics Canvas - Fullscreen Background -->
+    <canvas id="physicsCanvas"></canvas>
+
+    <!-- Toggle Button for Physics Mode -->
+    <button id="physicsToggle" class="toggle-button">
+      <span class="toggle-label">⚡ Physics Mode</span>
+    </button>
+
+    <main>
+      <div class="wrapper title">
+        <h1 class="">
+          Let's debunk.
+        </h1>
+        <!-- <p>Atelier Delcourt 3.2025<br /><br /></p> -->
+
+        <div class="infos">
+          <div class="column">
+            <!-- <p>Fullscreen mode: <br /><strong>None yet</strong></p> -->
+          </div>
+
+          <div class="column">
+            <!-- <p>  <strong>UX POC</strong> </p> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="wrapper">
+        <h2>*</h2>
+        <ul id="choices"></ul>
+
+        <div id="navControl">
+          <div id="" backButton>
+            <button id="back" class="back button">Back</button>
+          </div>
+          <div id="finalChoice">
+            <button id="restart" class="restart button">Restart</button>
+            <button id="Validate" class="validate button">Validate</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrapper results">
+        <ul id="selectList"></ul>
+      </div>
+
+      <div id="devArea" class="wrapper title">
+        <div id="tester">
+          <h3>Find parents of tag key</h3>
+          <input id="show-id" type="text" /> <br /><br />
+          <button id="go" class="button   back">Show</button><br /><br />
+          <textarea id="results" rows="40" cols="64"></textarea>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
