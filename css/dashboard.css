@@ -318,6 +318,7 @@ input {
   user-select: none;
   -webkit-user-select: none;
   width: 100%;
+  transform: translateY(-2px);
   
 }
 
@@ -326,7 +327,7 @@ input {
 }
 
 .button.choice:hover {
-    transform: scale(1.02);
+    transform: translateY(-2px) scale(1.02);
 
 }
 
@@ -340,13 +341,13 @@ input {
   background-color: hsl(213, 72%, 55%);
   color: white;
   border: 1px solid hsla(240, 3%, 45%, 0);
-  transform: scale(1.02);
+  transform: translateY(-2px) scale(1.02);
 }
 
 .button:active {
   background-color: hsl(0, 0%, 17%);
   border-color: #fff;
-  transform: scale(0.96);
+  transform: translateY(-2px) scale(0.96);
 }
 
 .button.disabled {
