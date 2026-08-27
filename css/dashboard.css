@@ -242,9 +242,10 @@ ul li a {
   text-decoration: none;
 }
 
-#show-id {
+.button.choice a {
+  display: block;
   width: 100%;
-  height: 2rem;
+  height: 100%;
 }
 
 input {
@@ -258,23 +259,11 @@ input {
   color: white;
 }
 
-textarea {
-  border: 1px solid #999999;
-  width: 100%;
-  margin: 0;
-  background-color: transparent;
-  color: white;
-  border: none;
-}
-
-#devArea {
-  visibility: hidden;
-}
-
 #choices {
   display: flex;
   align-items: stretch;
   flex-direction: column;
+  opacity: 0.95;
 }
 
 #choices li {
@@ -292,6 +281,7 @@ textarea {
 
 .button {
   display: block;
+  background-color: rgba(255, 255, 255, 0.95);
   border: 1px solid #979797;
   border-radius: 8px;
   box-sizing: border-box;
@@ -317,6 +307,7 @@ textarea {
 }
 
 .button.choice {
+  box-shadow: rgba(100, 100, 111, 0.4) 0px 7px 29px 0px;
 }
 
 .button.choice:hover {
@@ -355,22 +346,25 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: rgba(100, 100, 111, 0.4) 0px 7px 29px 0px;
 }
 
 .restart {
   width: 100%;
-  background-color: rgb(255, 174, 174);
+  background-color: rgba(255, 174, 174, 0.95);
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: rgba(100, 100, 111, 0.4) 0px 7px 29px 0px;
 }
 
 .validate {
   width: 100%;
-  background-color: rgb(114, 255, 114);
+  background-color: rgba(114, 255, 114, 0.95);
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: rgba(100, 100, 111, 0.4) 0px 7px 29px 0px;
   /* margin-top: 24px; */
 }
 
@@ -449,58 +443,15 @@ textarea {
   z-index: 5; /* Above background but below main UI */
   pointer-events: none;
   display: none; /* Hidden by default */
-  border: 2px solid red; /* Debug: visible border */
 }
 
 /* ------ Physics Toggle Button ---------- */
+/* Note: Toggle button is now inside .physics-controls panel */
+/* These styles are kept for backward compatibility but overridden */
 
 .toggle-button {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 1000;
-  
-  background-color: hsla(0, 0%, 20%, 0.9);
-  color: white;
-  border: 2px solid hsla(0, 0%, 40%, 0.8);
-  border-radius: 25px;
-  padding: 12px 24px;
-  
-  font-family: "SuisseIntl-Medium", sans-serif;
-  font-size: 14px;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  
-  cursor: pointer;
-  transition: all 0.3s ease;
-  
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.toggle-button:hover {
-  background-color: hsla(0, 0%, 30%, 0.95);
-  border-color: hsla(0, 0%, 60%, 1);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
-}
-
-.toggle-button:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-}
-
-.toggle-button.active {
-  background-color: hsla(142, 71%, 45%, 0.9);
-  border-color: hsla(142, 71%, 65%, 1);
-}
-
-.toggle-button.active:hover {
-  background-color: hsla(142, 71%, 55%, 0.95);
-}
-
-.toggle-label {
-  display: inline-block;
+  /* Styles moved to physics-controls.css */
+  /* This selector is kept to avoid breaking existing code */
 }
 
 /* Ensure main content is above canvas */

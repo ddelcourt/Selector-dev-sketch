@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/fonts.css" />
     <link rel="stylesheet" href="css/animate.css" />
     <link rel="stylesheet" href="css/dashboard.css" />
+    <link rel="stylesheet" href="css/physics-controls.css" />
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
@@ -24,6 +25,7 @@
 
     <script src="lib/showHide.js"></script>
     <script src="lib/physics.js"></script>
+    <script src="lib/physicsControls.js"></script>
 
     <script type="module">
       import { DecisionTree } from "/lib/decisionTree.js";
@@ -54,10 +56,111 @@
     <!-- Physics Canvas - Fullscreen Background -->
     <canvas id="physicsCanvas"></canvas>
 
-    <!-- Toggle Button for Physics Mode -->
-    <button id="physicsToggle" class="toggle-button">
-      <span class="toggle-label">⚡ Physics Mode</span>
-    </button>
+    <!-- Physics Controls Panel -->
+    <div id="physicsControls" class="physics-controls panel-hidden">
+      <!-- Toggle Button for Physics Mode -->
+      <button id="physicsToggle" class="toggle-button">
+        <span class="toggle-label">⚡ Physics Mode</span>
+      </button>
+      <h3>⚙️ Physics Parameters</h3>
+      
+      <div class="control-group">
+        <div class="control-label">
+          <span>Ball Size</span>
+          <span class="control-value" id="ballSizeValue">0.2%</span>
+        </div>
+        <input type="range" id="ballSize" min="0.001" max="0.06" step="0.0002" value="0.002">
+      </div>
+
+      <div class="control-group">
+        <div class="control-label">
+          <span>Velocity X</span>
+        </div>
+        <div class="range-group">
+          <div class="range-item">
+            <label>Min</label>
+            <input type="range" id="velocityXMin" min="-20" max="0" step="0.5" value="-5">
+            <div class="range-value" id="velocityXMinValue">-5</div>
+          </div>
+          <div class="range-item">
+            <label>Max</label>
+            <input type="range" id="velocityXMax" min="0" max="20" step="0.5" value="5">
+            <div class="range-value" id="velocityXMaxValue">5</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <div class="control-label">
+          <span>Velocity Y</span>
+        </div>
+        <div class="range-group">
+          <div class="range-item">
+            <label>Min</label>
+            <input type="range" id="velocityYMin" min="0" max="10" step="0.5" value="1">
+            <div class="range-value" id="velocityYMinValue">1</div>
+          </div>
+          <div class="range-item">
+            <label>Max</label>
+            <input type="range" id="velocityYMax" min="0" max="10" step="0.5" value="3">
+            <div class="range-value" id="velocityYMaxValue">3</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <div class="control-label">
+          <span>Bounciness</span>
+          <span class="control-value" id="bouncinessValue">0.95</span>
+        </div>
+        <input type="range" id="bounciness" min="0" max="2" step="0.05" value="0.95">
+      </div>
+
+      <div class="control-group">
+        <div class="control-label">
+          <span>Friction</span>
+          <span class="control-value" id="frictionValue">0.05</span>
+        </div>
+        <input type="range" id="friction" min="0" max="0.2" step="0.01" value="0.05">
+      </div>
+
+      <div class="control-group">
+        <div class="control-label">
+          <span>Stop Threshold</span>
+          <span class="control-value" id="velocityThresholdValue">0.30</span>
+        </div>
+        <input type="range" id="velocityThreshold" min="0" max="0.1" step="0.01" value="0.03">
+        <div class="control-hint">Minimum velocity before ball stops (prevents infinite bouncing)</div>
+      </div>
+
+      <div class="control-group">
+        <div class="control-label">
+          <span>Gravity</span>
+          <span class="control-value" id="gravityValue">1.0</span>
+        </div>
+        <input type="range" id="gravity" min="0" max="3" step="0.1" value="1">
+      </div>
+
+      <div class="control-group">
+        <div class="control-label">
+          <span>Text Size</span>
+          <span class="control-value" id="textSizeValue">0.22</span>
+        </div>
+        <input type="range" id="textSize" min="0.1" max="0.5" step="0.01" value="0.22">
+      </div>
+
+      <div class="control-group">
+        <div class="control-label">
+          <span>Text All Caps</span>
+        </div>
+        <label class="checkbox-container">
+          <input type="checkbox" id="allCaps">
+          <span class="checkbox-label">Enable</span>
+        </label>
+      </div>
+
+      <button class="reset-button" id="resetControls">Reset to Defaults</button>
+    </div>
 
     <main>
       <div class="wrapper title">
@@ -94,15 +197,6 @@
 
       <div class="wrapper results">
         <ul id="selectList"></ul>
-      </div>
-
-      <div id="devArea" class="wrapper title">
-        <div id="tester">
-          <h3>Find parents of tag key</h3>
-          <input id="show-id" type="text" /> <br /><br />
-          <button id="go" class="button   back">Show</button><br /><br />
-          <textarea id="results" rows="40" cols="64"></textarea>
-        </div>
       </div>
     </main>
   </body>
