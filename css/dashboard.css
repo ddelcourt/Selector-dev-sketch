@@ -304,6 +304,31 @@ input {
   flex-direction: column;
 }
 
+/* Final state: move to bottom of screen */
+#navControl.final-state {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%) translateY(0);
+  width: calc(100% - 40px);
+  max-width: 600px;
+  margin-top: 0;
+  z-index: 100;
+  animation: slideUpFromBottom 0.8s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+}
+
+/* Keyframe animation for sliding up from bottom */
+@keyframes slideUpFromBottom {
+  from {
+    transform: translateX(-50%) translateY(150px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+}
+
 /* Back button container */
 #navControl > div[backButton] {
   order: 2; /* Always place back button after finalChoice */
@@ -410,6 +435,30 @@ input {
 #finalChoice {
   display: none;
   order: 1; /* Place finalChoice before back button */
+}
+
+/* Staggered animation for final choice buttons */
+#navControl.final-state #finalChoice .validate {
+  animation: slideUpButton 0.6s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+  animation-delay: 0.1s;
+  opacity: 0;
+}
+
+#navControl.final-state #finalChoice .restart {
+  animation: slideUpButton 0.6s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+  animation-delay: 0.3s;
+  opacity: 0;
+}
+
+@keyframes slideUpButton {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 /* ------ Viewport is Mobile phone ---------- */
@@ -577,6 +626,13 @@ input {
 
   #navControl {
     margin-top: 0;
+  }
+
+  /* Adjust final state positioning for mobile */
+  #navControl.final-state {
+    bottom: 20px;
+    width: calc(100% - 30px);
+    max-width: 100%;
   }
 
 }
