@@ -16,8 +16,8 @@ body {
 }
 
 .wrapper {
-  width: 100%;
-  max-width: 600px;
+  width: 600px;
+  max-width: 100%;
   padding: 20px;
   margin-left: -20px;
   /* border: 1px solid hsl(240, 3%, 25%); */
@@ -253,9 +253,10 @@ input {
   font-family: "SuisseIntl-Medium", sans-serif;
   font-weight: normal;
   font-size: 16px;
-  padding: 4px;
+  /* padding: 4px; */
+  padding:0;
   background-color: transparent;
-  border: 1px solid #999999;
+  border: 1px solid #272727;
   color: white;
 }
 
@@ -347,6 +348,7 @@ input {
   align-items: center;
   justify-content: center;
   box-shadow: rgba(100, 100, 111, 0.4) 0px 7px 29px 0px;
+  opacity: 0.5;
 }
 
 .restart {

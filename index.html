@@ -27,29 +27,7 @@
     <script src="lib/physics.js"></script>
     <script src="lib/physicsControls.js"></script>
 
-    <script type="module">
-      import { DecisionTree } from "/lib/decisionTree.js";
-
-      // Initialize on page load
-      async function init() {
-        try {
-          const data = await (await fetch("./lib/data.json")).json();
-          
-          // Save to local storage
-          localStorage.setItem('decisionTreeData', JSON.stringify(data));
-          console.log('Data saved to localStorage');
-          
-          const tree = new DecisionTree(data);
-          console.log('DecisionTree initialized:', tree);
-          console.log("DecisionTree defined:", typeof DecisionTree);
-        } catch (error) {
-          console.error("Error loading data:", error);
-        }
-      }
-      
-      // Call init when page loads
-      window.addEventListener('DOMContentLoaded', init);
-    </script>
+    <script type="module" src="lib/decisionTree.js"></script>
   </head>
 
   <body>
@@ -60,9 +38,9 @@
     <div id="physicsControls" class="physics-controls panel-hidden">
       <!-- Toggle Button for Physics Mode -->
       <button id="physicsToggle" class="toggle-button">
-        <span class="toggle-label">⚡ Physics Mode</span>
+        <span class="toggle-label">Physics Mode</span>
       </button>
-      <h3>⚙️ Physics Parameters</h3>
+      <h3>Physics Parameters</h3>
       
       <div class="control-group">
         <div class="control-label">
@@ -160,6 +138,7 @@
       </div>
 
       <button class="reset-button" id="resetControls">Reset to Defaults</button>
+      <button class="export-button" id="exportSettings">Export Settings</button>
     </div>
 
     <main>

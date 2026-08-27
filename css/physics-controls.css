@@ -1,21 +1,20 @@
-/* Physics Controls Panel - Clay Design System Inspired */
+/* Physics Controls Panel - Swiss Graphic Design Style */
 
 .physics-controls {
   position: fixed;
   top: 20px;
   right: 20px;
   width: 280px;
-  background: rgba(25, 25, 25, 0.95);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 20px;
+  background: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 0;
+  padding: 14px;
   z-index: 1000;
   opacity: 1;
   pointer-events: all;
   transform: translateY(0);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  transition: none;
+  box-shadow: none;
 }
 
 /* Hidden state using class instead of inline display */
@@ -29,41 +28,44 @@
   top: 0;
   right: 0;
   width: 100%;
-  margin-bottom: 20px;
-  background-color: hsla(0, 0%, 20%, 0.9);
-  color: white;
-  border: 2px solid hsla(0, 0%, 40%, 0.8);
-  border-radius: 8px;
-  padding: 14px 20px;
-  font-family: "SuisseIntl-Medium", sans-serif;
-  font-size: 14px;
-  font-weight: bold;
+  margin-bottom: 14px;
+  background-color: #000000;
+  color: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 0;
+  padding: 7px 9px;
+  font-family: "SuisseIntl-Regular", sans-serif;
+  font-size: 11px;
+  font-weight: normal;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  transition: none;
+  box-shadow: none;
 }
 
 .physics-controls .toggle-button:hover {
-  background-color: hsla(0, 0%, 30%, 0.95);
-  border-color: hsla(0, 0%, 60%, 1);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  background-color: #ffffff;
+  color: #000000;
+  border-color: #000000;
+  transform: none;
+  box-shadow: none;
 }
 
 .physics-controls .toggle-button:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transform: none;
+  box-shadow: none;
 }
 
 .physics-controls .toggle-button.active {
-  background-color: hsla(142, 71%, 45%, 0.9);
-  border-color: hsla(142, 71%, 65%, 1);
+  background-color: #ffffff;
+  color: #000000;
+  border-color: #000000;
 }
 
 .physics-controls .toggle-button.active:hover {
-  background-color: hsla(142, 71%, 55%, 0.95);
+  background-color: #000000;
+  color: #ffffff;
 }
 
 .physics-controls .toggle-label {
@@ -71,18 +73,19 @@
 }
 
 .physics-controls h3 {
-  margin: 0 0 20px 0;
-  font-size: 14px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 14px 0;
+  font-size: 11px;
+  font-weight: normal;
+  color: #000000;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding-bottom: 12px;
+  letter-spacing: 1px;
+  border-bottom: 1px solid #000000;
+  padding-bottom: 5px;
+  font-family: "SuisseIntl-Regular", sans-serif;
 }
 
 .control-group {
-  margin-bottom: 20px;
+  margin-bottom: 14px;
 }
 
 .control-group:last-child {
@@ -92,99 +95,102 @@
 .control-label {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.7);
+  align-items: baseline;
+  margin-bottom: 7px;
+  font-size: 11px;
+  color: #000000;
+  font-family: "SuisseIntl-Regular", sans-serif;
+  letter-spacing: 0.5px;
 }
 
 .control-label span {
-  font-weight: 400;
+  font-weight: normal;
 }
 
 .control-value {
-  font-family: 'Courier New', monospace;
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.5);
-  background: rgba(255, 255, 255, 0.05);
-  padding: 2px 8px;
-  border-radius: 4px;
+  font-family: "SuisseIntl-Regular", sans-serif;
+  font-size: 11px;
+  color: #000000;
+  background: none;
+  padding: 0;
+  border-radius: 0;
 }
 
 .control-hint {
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.4);
-  margin-top: 6px;
+  font-size: 9px;
+  color: #666666;
+  margin-top: 5px;
   line-height: 1.4;
-  font-style: italic;
+  font-style: normal;
+  font-family: "SuisseIntl-Regular", sans-serif;
 }
 
-/* Custom Slider Styling */
+/* Custom Slider Styling - Swiss Minimal */
 input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: 4px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 2px;
+  height: 1px;
+  background: #000000;
+  border-radius: 0;
   outline: none;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: none;
 }
 
 input[type="range"]:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: #000000;
 }
 
 /* Webkit (Chrome, Safari) */
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 16px;
-  height: 16px;
-  background: white;
+  width: 12px;
+  height: 12px;
+  background: #999999;
   border-radius: 50%;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: none;
+  transition: none;
 }
 
 input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.15);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transform: none;
+  box-shadow: none;
 }
 
 input[type="range"]::-webkit-slider-thumb:active {
-  transform: scale(0.95);
+  transform: none;
 }
 
 /* Firefox */
 input[type="range"]::-moz-range-thumb {
-  width: 16px;
-  height: 16px;
-  background: white;
+  width: 12px;
+  height: 12px;
+  background: #202020;
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: none;
+  transition: none;
 }
 
 input[type="range"]::-moz-range-thumb:hover {
-  transform: scale(1.15);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transform: none;
+  box-shadow: none;
 }
 
 input[type="range"]::-moz-range-thumb:active {
-  transform: scale(0.95);
+  transform: none;
 }
 
 /* Range group for min/max controls */
 .range-group {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-top: 8px;
+  gap: 9px;
+  margin-top: 7px;
 }
 
 .range-item {
@@ -193,11 +199,12 @@ input[type="range"]::-moz-range-thumb:active {
 }
 
 .range-item label {
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.5);
-  margin-bottom: 6px;
+  font-size: 9px;
+  color: #000000;
+  margin-bottom: 5px;
   text-transform: uppercase;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.5px;
+  font-family: "SuisseIntl-Regular", sans-serif;
 }
 
 .range-item input[type="range"] {
@@ -205,10 +212,10 @@ input[type="range"]::-moz-range-thumb:active {
 }
 
 .range-value {
-  font-family: 'Courier New', monospace;
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.5);
-  text-align: center;
+  font-family: "SuisseIntl-Regular", sans-serif;
+  font-size: 9px;
+  color: #666666;
+  text-align: left;
   margin-top: 4px;
 }
 
@@ -223,78 +230,110 @@ input[type="range"]::-moz-range-thumb:active {
 .checkbox-container input[type="checkbox"] {
   appearance: none;
   -webkit-appearance: none;
-  width: 18px;
-  height: 18px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 4px;
+  width: 14px;
+  height: 14px;
+  background: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 0;
   cursor: pointer;
   position: relative;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  margin-right: 8px;
+  transition: none;
+  margin-right: 6px;
 }
 
 .checkbox-container input[type="checkbox"]:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: #ffffff;
+  border-color: #000000;
 }
 
 .checkbox-container input[type="checkbox"]:checked {
-  background: rgba(99, 211, 255, 0.8);
-  border-color: rgba(99, 211, 255, 1);
+  background: #000000;
+  border-color: #000000;
 }
 
 .checkbox-container input[type="checkbox"]:checked::after {
-  content: '✓';
+  content: '';
   position: absolute;
-  color: #000;
-  font-size: 14px;
-  font-weight: bold;
+  width: 6px;
+  height: 3px;
+  border-left: 1px solid #ffffff;
+  border-bottom: 1px solid #ffffff;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -60%) rotate(-45deg);
 }
 
 .checkbox-label {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.7);
+  font-size: 11px;
+  color: #000000;
+  font-family: "SuisseIntl-Regular", sans-serif;
 }
 
 /* Reset Button */
 .reset-button {
   width: 100%;
-  padding: 10px;
-  margin-top: 20px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 6px;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 12px;
+  padding: 7px 9px;
+  margin-top: 14px;
+  background: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 0;
+  color: #000000;
+  font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: none;
+  font-family: "SuisseIntl-Regular", sans-serif;
 }
 
 .reset-button:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.9);
-  border-color: rgba(255, 255, 255, 0.2);
+  background: #000000;
+  color: #ffffff;
+  border-color: #000000;
 }
 
 .reset-button:active {
-  transform: scale(0.98);
+  transform: none;
+}
+
+/* Export Button */
+.export-button {
+  width: 100%;
+  padding: 7px 9px;
+  margin-top: 7px;
+  background: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 0;
+  color: #000000;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: none;
+  font-family: "SuisseIntl-Regular", sans-serif;
+}
+
+.export-button:hover {
+  background: #000000;
+  color: #ffffff;
+  border-color: #000000;
+}
+
+.export-button:active {
+  transform: none;
 }
 
 /* Hide physics mode parameters when not active */
 .physics-controls:not(.physics-active) .control-group,
 .physics-controls:not(.physics-active) h3,
-.physics-controls:not(.physics-active) .reset-button {
+.physics-controls:not(.physics-active) .reset-button,
+.physics-controls:not(.physics-active) .export-button {
   display: none;
 }
 
 .physics-controls.physics-active .control-group,
 .physics-controls.physics-active h3,
-.physics-controls.physics-active .reset-button {
+.physics-controls.physics-active .reset-button,
+.physics-controls.physics-active .export-button {
   display: block;
 }
