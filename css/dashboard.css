@@ -593,6 +593,7 @@ input {
   pointer-events: none;
   display: none;
   overflow: hidden;
+  border: 1px solid red;
 }
 
 /* ------ Physics Toggle Button ---------- */
