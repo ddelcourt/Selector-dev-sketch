@@ -10,31 +10,31 @@
 
     "blog": {
       "choice": "Blog post",
-      "stepTitle": "Characteristics",
+      "stepTitle": "What is this post typology?",
       "children": ["individual", "pressmedia", "institution", "business"]
     },
 
     "synthesis": {
       "choice": "Editorial synthesis",
-      "stepTitle": "Characteristics",
+      "stepTitle": "What is this post typology? ",
       "children": ["individual", "pressmedia", "institution", "business"]
     },
 
     "popularization": {
       "choice": "Popularization",
-      "stepTitle": "Characteristics",
+      "stepTitle": "What is this post typology?",
       "children": ["individual", "pressmedia", "institution", "business"]
     },
 
     "indepth": {
       "choice": "In-depth article",
-      "stepTitle": "Characteristics",
+      "stepTitle": "What is this post typology?",
       "children": ["individual", "pressmedia", "institution", "business"]
     },
 
     "video": {
       "choice": "Audio/Video",
-      "stepTitle": "Characteristics",
+      "stepTitle": "What is this post typology?",
       "children": ["individual", "pressmedia", "institution", "business"]
     },
 
@@ -141,22 +141,22 @@
 
     "true": {
       "choice": "True",
-      "stepTitle": "What will experts think?",
+      "stepTitle": "What will experts think? It is…",
       "children": ["verifiable", "opinion", "selfpromo"]
     },
     "false": {
       "choice": "False",
-      "stepTitle": "What will experts think?",
+      "stepTitle": "What will experts think? It is…",
       "children": ["biased", "rumor", "misleading", "harmful"]
     },
     "inaccurate": {
       "choice": "Inaccurate",
-      "stepTitle": "What will experts think?",
+      "stepTitle": "What will experts think? It is…",
       "children": ["biased", "rumor", "misleading"]
     },
     "sales-oriented": {
       "choice": "Sales-oriented",
-      "stepTitle": "What will experts think?",
+      "stepTitle": "What will experts think? It is…",
       "children": ["verifiable", "biased", "selfpromo", "misleading"]
     },
 

@@ -1,12 +1,23 @@
+html {
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
 body {
   background-color: hsl(0, 0%, 23%);
   margin: 0;
   padding-top: 80px;
-  width: auto;
+  width: 100%;
+  max-width: 100vw;
+  min-height: 100vh;
   overflow-x: hidden;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 
   font-family: "SuisseIntl-Medium", sans-serif;
@@ -16,17 +27,13 @@ body {
 }
 
 .wrapper {
-  width: 600px;
+  width: 100%;
   max-width: 100%;
   padding: 20px;
-  margin-left: -20px;
-  /* border: 1px solid hsl(240, 3%, 25%); */
+  margin: 0 0 32px 0;
   border-radius: 5px;
-
-  margin-bottom: 32px;
+  box-sizing: border-box;
   overflow: hidden;
-
-  align-items: flex-start;
   position: relative;
 }
 
@@ -35,10 +42,14 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
   align-content: stretch;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .column {
   flex: 50%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .infos p {
@@ -159,8 +170,9 @@ h1 {
   font-size: 32px;
   line-height: 34px;
   color: white;
-  margin: 6px;
+  margin: 6px 0;
   margin-bottom: 18px;
+  max-width: 100%;
 }
 
 .disabled {
@@ -176,8 +188,9 @@ h2 {
   font-size: 20px;
   line-height: 22px;
   color: white;
-  margin: 6px;
+  margin: 6px 0;
   margin-bottom: 18px;
+  max-width: 100%;
 }
 
 p {
@@ -186,8 +199,9 @@ p {
   font-size: 14px;
   line-height: 17px;
   color: rgb(104, 104, 104);
-  margin: 6px;
-  max-width: 80vw;
+  margin: 6px 0;
+  max-width: 100%;
+  word-wrap: break-word;
 }
 
 strong {
@@ -230,6 +244,8 @@ ul li {
   padding: 0;
   display: flex;
   border-radius: 4px;
+  box-sizing: border-box;
+  max-width: 100%;
 
   font-family: "SuisseIntl-Medium", sans-serif;
   font-weight: normal;
@@ -399,26 +415,135 @@ input {
 /* ------ Viewport is Mobile phone ---------- */
 
 @media only screen and (max-width: 600px) {
-  .column {
-    flex: 100%;
+  body {
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+    display: block;
   }
 
-  body {
+  main {
+    max-width: 80%;
+  }
+
+  .wrapper {
     padding: 15px;
-    padding-top: 0px;
+    margin: 0 0 16px 0;
+  }
+
+  .wrapper.title {
+    padding-top: 20px;
+  }
+
+  .column {
+    flex: 100%;
+    width: 100%;
+  }
+
+  .infos {
+    width: 100%;
   }
 
   .qr {
     display: none;
+  }
+
+  h1 {
+    font-size: 28px;
+    line-height: 30px;
+    margin: 0 0 16px 0;
+  }
+
+  h2 {
+    font-size: 18px;
+    line-height: 20px;
+    margin: 0 0 12px 0;
+  }
+
+  p {
+    margin: 0 0 8px 0;
+  }
+
+  .button {
+    padding: 18px 12px;
+    font-size: 14px;
+    margin: 4px 0;
+  }
+
+  #choices,
+  #choices li,
+  #navControl {
+    width: 100%;
+  }
+
+  .results {
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    left: 0;
+    transform: none;
+  }
+
+  .results li {
+    min-width: 3.5rem;
+    min-height: 3.5rem;
+    font-size: 11px;
+    padding: 0.5rem;
+    margin-left: 0.5rem;
+  }
+
+  .results li:first-child {
+    margin-left: 0;
+  }
+
+  ul#selectList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+
+  #physicsCanvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+}
+
+/* Extra small devices (iPhone SE, etc.) */
+@media only screen and (max-width: 375px) {
+  html,
+  body {
+    font-size: 14px;
+  }
+
+  .wrapper {
+    padding: 10px;
+    margin: 0 0 12px 0;
+  }
+
+  h1 {
+    font-size: 24px;
+    line-height: 26px;
+  }
+
+  h2 {
+    font-size: 16px;
+    line-height: 18px;
+  }
+
+  .button {
+    padding: 14px 10px;
+    font-size: 13px;
   }
 }
 
 /* ------ Viewport is horizontal ---------- */
 
 @media (orientation: landscape) {
-  .wrapper {
-    align-items: flex-start;
-  }
+  /* Landscape-specific styles if needed */
 }
 
 /* ------ Viewport is vertical ---------- */
@@ -460,13 +585,14 @@ input {
 
 #physicsCanvas {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 5; /* Above background but below main UI */
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  z-index: 5;
   pointer-events: none;
-  display: none; /* Hidden by default */
+  display: none;
+  overflow: hidden;
 }
 
 /* ------ Physics Toggle Button ---------- */
@@ -478,10 +604,15 @@ input {
   /* This selector is kept to avoid breaking existing code */
 }
 
-/* Ensure main content is above canvas */
+/* Main content container */
 main {
   position: relative;
   z-index: 10;
+  width: 100%;
+  max-width: 600px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  margin: 0 auto;
 }
 
 
