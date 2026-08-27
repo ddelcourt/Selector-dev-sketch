@@ -315,6 +315,25 @@ input {
   margin-top: 0;
   z-index: 100;
   animation: slideUpFromBottom 0.8s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+/* In final state, back button positioned on the left */
+#navControl.final-state > div[backButton] {
+  order: 1;
+  margin-top: 0;
+  flex-shrink: 0;
+}
+
+/* finalChoice takes center, staying centered */
+#navControl.final-state #finalChoice {
+  order: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Keyframe animation for sliding up from bottom */
@@ -331,7 +350,7 @@ input {
 
 /* Back button container */
 #navControl > div[backButton] {
-  order: 2; /* Always place back button after finalChoice */
+  order: 2; /* Place back button after finalChoice by default */
   margin-top: 0;
 }
 
@@ -413,6 +432,11 @@ input {
   font-size: 14px;
 }
 
+/* Back button in final state - no top margin */
+#navControl.final-state .back {
+  margin-top: 0;
+}
+
 .restart {
   width: 100%;
   background-color: rgba(255, 174, 174, 0.95);
@@ -430,6 +454,12 @@ input {
   justify-content: center;
   box-shadow: rgba(100, 100, 111, 0.4) 0px 7px 29px 0px;
   /* margin-top: 24px; */
+}
+
+/* In final state, constrain button widths */
+#navControl.final-state .validate,
+#navControl.final-state .restart {
+  max-width: 400px;
 }
 
 #finalChoice {
