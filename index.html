@@ -12,8 +12,12 @@
     <link rel="stylesheet" href="css/animate.css" />
     <link rel="stylesheet" href="css/dashboard.css" />
     <link rel="stylesheet" href="css/physics-controls.css" />
+    <link rel="stylesheet" href="css/docs-panel.css" />
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Marked.js for Markdown rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     
     <script>
       window.jQuery ||
@@ -26,6 +30,7 @@
     <script src="lib/showHide.js"></script>
     <script src="lib/physics.js"></script>
     <script src="lib/physicsControls.js"></script>
+    <script src="lib/docsPanel.js"></script>
 
     <script type="module" src="lib/decisionTree.js"></script>
   </head>
@@ -33,6 +38,16 @@
   <body>
     <!-- Physics Canvas - Fullscreen Background -->
     <canvas id="physicsCanvas"></canvas>
+
+    <!-- Documentation Panel - Left Side -->
+    <div id="docsPanel" class="docs-panel panel-hidden">
+      <h3>Project Documentation</h3>
+      
+      <!-- Documentation File List -->
+      <div class="docs-list" id="docsList">
+        <div class="loading">Loading documentation...</div>
+      </div>
+    </div>
 
     <!-- Physics Controls Panel -->
     <div id="physicsControls" class="physics-controls panel-hidden">

@@ -1,52 +1,96 @@
-# Repository Context Documentation
+# Project Documentation
 
-**Context preservation for the Descriptor Selection Tool project**
-
----
-
-## What Is This?
-
-This folder contains comprehensive documentation created to preserve project context when moving the workspace to a new location. These files allow AI assistants and developers to quickly understand the project without access to previous chat history.
+**Descriptor Selection Tool - Documentation Index**
 
 ---
 
-## How to Use These Files
+## Primary Documentation
 
-### When Opening Project in New Location
+### **[TECHNICAL_DOCUMENTATION.md](../TECHNICAL_DOCUMENTATION.md)**
 
-1. **Start here:** Read `quick-reference.md` (5 minutes)
-2. **For full context:** Read `project-context.md` (15 minutes)
-3. **For recent work:** Read `recent-changes.md` (10 minutes)
+**The complete technical reference for this project** - Start here for comprehensive understanding.
 
-### When Working on the Project
+This is the main documentation file covering:
 
-- **Making changes?** Check `architecture.md` for data flow
-- **Debugging?** Use diagnostic tips in `quick-reference.md`
-- **Adding features?** Review patterns in `project-context.md`
-- **Tracking history?** Update `changelog.md`
+- **System Architecture** - Component diagram, file structure, technology stack
+- **Core Modules** - DecisionTree, PhysicsEngine, PhysicsControls (with full API reference)
+- **Data Structures** - JSON schema, graph properties, navigation history
+- **Physics Engine Deep Dive** - Matter.js integration, collision resolution, energy management, physics modes
+- **Event Flow & State Management** - Application lifecycle, state synchronization, event handlers
+- **API Reference** - Complete method documentation for all modules
+- **Configuration & Customization** - Physics parameters, ball colors, modes, styling
+- **Design Patterns & Best Practices** - Module pattern, event-driven architecture, error handling
 
----
+**Read time**: 30-45 minutes for complete understanding
 
-## File Guide
+### **[Changelog](changelog.md)**
 
-### 📘 quick-reference.md (5 min read)
-Fast onboarding guide with common tasks, debugging tips, and critical requirements.
-
-### 📗 project-context.md (15 min read)
-Comprehensive project documentation including architecture, recent work, and implementation patterns.
-
-### 📙 recent-changes.md (10 min read)
-Detailed implementation notes from August 2026 sessions with problem/solution pairs.
-
-### 📕 architecture.md (Reference)
-Technical diagrams, data flow, state synchronization rules, and component dependencies.
-
-### 📔 changelog.md (Reference)
-Version history, feature evolution, performance improvements, and development timeline.
+Version history and recent changes - Perfect format, chronological record of all updates.
 
 ---
 
-## Quick Decision Tree
+## Quick Start
+
+### New to the Project?
+
+1. **Read [README.md](../../README.md)** (5 min) - Overview, features, quick start
+2. **Read [TECHNICAL_DOCUMENTATION.md](../TECHNICAL_DOCUMENTATION.md)** (30 min) - Complete technical reference
+3. **Review [changelog.md](changelog.md)** (5 min) - Recent changes and version history
+
+### Need Something Specific?
+
+| Task | Documentation Section |
+|------|----------------------|
+| Understand architecture | TECHNICAL_DOCUMENTATION.md → System Architecture |
+| Learn API methods | TECHNICAL_DOCUMENTATION.md → API Reference |
+| Modify decision tree | TECHNICAL_DOCUMENTATION.md → Data Structures |
+| Customize physics | TECHNICAL_DOCUMENTATION.md → Configuration & Customization |
+| Debug issues | TECHNICAL_DOCUMENTATION.md → Design Patterns (Error Handling) |
+| Add new features | TECHNICAL_DOCUMENTATION.md → Core Modules + API Reference |
+| Review recent work | changelog.md |
+
+---
+
+## File Organization
+
+**Documentation has been consolidated for clarity:**
+
+```
+/
+├── README.md                      ← Project overview, quick start
+└── docs/
+    ├── TECHNICAL_DOCUMENTATION.md ← Complete technical reference (NEW)
+    └── context/
+        ├── README.md              ← This file (documentation index)
+        └── changelog.md           ← Version history
+```
+
+**Previous multiple documentation files have been merged into a single comprehensive technical reference.**
+
+---
+
+## For AI Assistants
+
+When starting work on this project:
+
+1. **Load [TECHNICAL_DOCUMENTATION.md](../TECHNICAL_DOCUMENTATION.md) first** - Contains complete codebase reference
+2. **Check [changelog.md](changelog.md)** - Understand recent changes and current version
+3. **Follow design patterns** - Documented in TECHNICAL_DOCUMENTATION.md
+4. **Preserve state invariants** - `selectList.length === balls.length === triggeredBalls.size`
+
+---
+
+## External Resources
+
+- **Matter.js Documentation**: https://brm.io/matter-js/docs/
+- **jQuery API**: https://api.jquery.com/
+- **Canvas API**: https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API
+
+---
+
+**Last Updated**: August 28, 2026  
+**Documentation Structure**: Consolidated single-file reference
+
 
 ```
 Need to...
@@ -70,10 +114,10 @@ Need to...
 
 ## Critical Information
 
-### ⚠️ SVG Export Requirement
+### SVG Export Requirement
 **From user memory:** SVG export is NON-NEGOTIABLE. Must preserve in any architecture change.
 
-### 🎯 Key Patterns to Preserve
+### Key Patterns to Preserve
 1. Navigation history system (v2.0)
 2. hadBall flag for back button
 3. Sin-hole falling effect

@@ -1,0 +1,134 @@
+/* Documentation Panel - Swiss Graphic Design Style (Left Side) */
+
+.docs-panel {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 280px;
+  background: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 0;
+  padding: 14px;
+  z-index: 1000;
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+  transition: none;
+  box-shadow: none;
+}
+
+/* Hidden state using class instead of inline display */
+.docs-panel.panel-hidden {
+  display: none;
+}
+
+/* Toggle button inside panel */
+.docs-panel .toggle-button {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  margin-bottom: 14px;
+  background-color: #000000;
+  color: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 0;
+  padding: 7px 9px;
+  font-family: "SuisseIntl-Regular", sans-serif;
+  font-size: 11px;
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: none;
+  box-shadow: none;
+}
+
+.docs-panel .toggle-button:hover {
+  background-color: #ffffff;
+  color: #000000;
+  border-color: #000000;
+  transform: none;
+  box-shadow: none;
+}
+
+.docs-panel .toggle-button:active {
+  transform: none;
+  box-shadow: none;
+}
+
+.docs-panel h3 {
+  margin: 0 0 14px 0;
+  font-size: 11px;
+  font-weight: normal;
+  color: #000000;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1px solid #000000;
+  padding-bottom: 5px;
+  font-family: "SuisseIntl-Regular", sans-serif;
+}
+
+/* Documentation List */
+.docs-list {
+  max-height: calc(100vh - 150px);
+  overflow-y: auto;
+  border: 1px solid #e0e0e0;
+  background: #fafafa;
+}
+
+.docs-list .loading {
+  padding: 14px;
+  font-size: 11px;
+  color: #666666;
+  text-align: center;
+  font-family: "SuisseIntl-Regular", sans-serif;
+}
+
+.doc-item {
+  padding: 9px 11px;
+  border-bottom: 1px solid #e0e0e0;
+  cursor: pointer;
+  font-size: 11px;
+  font-family: "SuisseIntl-Regular", sans-serif;
+  color: #000000;
+  transition: background-color 0.15s ease;
+  background: #ffffff;
+}
+
+.doc-item:last-child {
+  border-bottom: none;
+}
+
+.doc-item:hover {
+  background-color: #f0f0f0;
+}
+
+.doc-item-name {
+  display: block;
+  font-weight: normal;
+}
+
+.doc-item-path {
+  display: block;
+  font-size: 9px;
+  color: #666666;
+  margin-top: 3px;
+}
+
+/* Scrollbar styling for webkit browsers */
+.docs-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.docs-list::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+.docs-list::-webkit-scrollbar-thumb {
+  background: #cccccc;
+  border-radius: 0;
+}
+
+.docs-lis: #999999;
+}

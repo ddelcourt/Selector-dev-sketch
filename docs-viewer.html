@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation Viewer</title>
+  
+  <link rel="stylesheet" href="css/fonts.css" />
+  
+  <!-- Marked.js for Markdown rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  
+  <!-- Mermaid.js for diagram rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  
+  <!-- SVG Pan Zoom for interactive diagrams -->
+  <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "SuisseIntl-Regular", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #000000;
+      background: #ffffff;
+      display: flex;
+      min-height: 100vh;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .layout-container {
+      display: flex;
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .sidebar {
+      width: 280px;
+      min-width: 280px;
+      padding: 40px 20px;
+      border-right: 1px solid #e0e0e0;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      background: #fafafa;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .sidebar h2 {
+      font-size: 12px;
+      font-weight: normal;
+      font-family: "SuisseIntl-Medium", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #666666;
+      margin-bottom: 16px;
+    }
+
+    .outline {
+      list-style: none;
+    }
+
+    .outline-item {
+      margin-bottom: 4px;
+    }
+
+    .outline-item a {
+      display: block;
+      padding: 6px 12px;
+      color: #333333;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 13px;
+      line-height: 1.4;
+      transition: all 0.2s ease;
+    }
+
+    .outline-item a:hover {
+      background: #e8e8e8;
+      color: #000000;
+    }
+
+    .outline-item.active a {
+      background: #000000;
+      color: #ffffff;
+      font-family: "SuisseIntl-Medium", sans-serif;
+    }
+
+    .outline-item.level-1 a {
+      padding-left: 12px;
+      font-family: "SuisseIntl-Medium", sans-serif;
+    }
+
+    .outline-item.level-2 a {
+      padding-left: 24px;
+    }
+
+    .outline-item.level-3 a {
+      padding-left: 36px;
+      font-size: 12px;
+    }
+
+    .outline-item.level-4 a {
+      padding-left: 48px;
+      font-size: 12px;
+    }
+
+    .sidebar-toggle {
+      display: none;
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: #000000;
+      color: #ffffff;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: "SuisseIntl-Regular", sans-serif;
+      font-size: 12px;
+      z-index: 1000;
+    }
+
+    /* Night mode styles */
+    body.night-mode {
+      background: #1a1a1a;
+      color: #e0e0e0;
+    }
+
+    body.night-mode .sidebar {
+      background: #0a0a0a;
+      border-right-color: #333333;
+    }
+
+    body.night-mode .sidebar h2 {
+      color: #999999;
+    }
+
+    body.night-mode .outline-item a {
+      color: #cccccc;
+    }
+
+    body.night-mode .outline-item a:hover {
+      background: #2a2a2a;
+      color: #ffffff;
+    }
+
+    body.night-mode .outline-item.active a {
+      background: #ffffff;
+      color: #000000;
+    }
+
+    body.night-mode .header {
+      border-bottom-color: #444444;
+    }
+
+    body.night-mode .header h1 {
+      color: #ffffff;
+    }
+
+    body.night-mode .header .doc-path {
+      color: #999999;
+    }
+
+    body.night-mode .content h1 {
+      color: #ffffff;
+      border-bottom-color: #444444;
+    }
+
+    body.night-mode .content h2 {
+      color: #ffffff;
+      border-bottom-color: #333333;
+    }
+
+    body.night-mode .content h3,
+    body.night-mode .content h4,
+    body.night-mode .content h5,
+    body.night-mode .content h6 {
+      color: #ffffff;
+    }
+
+    body.night-mode .content p {
+      color: #e0e0e0;
+    }
+
+    body.night-mode .content code {
+      background: #2a2a2a;
+      color: #ff6b6b;
+      border-color: #444444;
+    }
+
+    body.night-mode .content pre {
+      background: #2a2a2a;
+      border-color: #444444;
+    }
+
+    body.night-mode .content pre code {
+      color: #e0e0e0;
+    }
+
+    body.night-mode .content blockquote {
+      border-left-color: #666666;
+      color: #999999;
+    }
+
+    body.night-mode .content a {
+      color: #66b3ff;
+    }
+
+    body.night-mode .content hr {
+      border-top-color: #333333;
+    }
+
+    body.night-mode .content table th,
+    body.night-mode .content table td {
+      border-color: #444444;
+    }
+
+    body.night-mode .content table th {
+      background: #2a2a2a;
+    }
+
+    body.night-mode .content img {
+      border-color: #444444;
+    }
+
+    body.night-mode .error {
+      background: #3a1a1a;
+      border-color: #ff6b6b;
+      color: #ff6b6b;
+    }
+
+    body.night-mode .loading {
+      color: #666666;
+    }
+
+    /* Night mode toggle button */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #000000;
+      color: #ffffff;
+      border: 2px solid #000000;
+      padding: 8px 16px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-family: "SuisseIntl-Medium", sans-serif;
+      font-size: 13px;
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    body.night-mode .theme-toggle {
+      background: #ffffff;
+      color: #000000;
+      border-color: #ffffff;
+    }
+
+    .theme-toggle:hover {
+      opacity: 0.8;
+    }
+
+    /* Mermaid diagram interactive styles */
+    .mermaid-container {
+      position: relative;
+      margin: 20px 0;
+      /* border: 1px solid #e0e0e0; */
+      /* border-radius: 4px; */
+      background: #fafafa;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      min-height: 600px;
+    }
+
+    .mermaid-container:hover {
+      border-color: #000000;
+      /* box-shadow: 0 2px 8px rgba(0,0,0,0.1); */
+    }
+
+    .mermaid-container svg {
+      max-width: 100%;
+      min-height: 600px;
+      height: auto;
+      display: block;
+    }
+
+    .diagram-hint {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 3px;
+      font-size: 11px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .mermaid-container:hover .diagram-hint {
+      opacity: 1;
+    }
+
+    body.night-mode .mermaid-container {
+      background: #1a1a1a;
+      border-color: #444444;
+    }
+
+    body.night-mode .mermaid-container:hover {
+      border-color: #ffffff;
+    }
+
+    /* Fullscreen diagram modal */
+    .diagram-fullscreen {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #fafafa;
+      z-index: 10000;
+    }
+
+    .diagram-fullscreen.active {
+      display: block;
+    }
+
+    .diagram-fullscreen-content {
+      position: absolute;
+      top: 70px;
+      left: 20px;
+      right: 20px;
+      bottom: 80px;
+      overflow: hidden;
+      background: #ffffff;
+      border-radius: 4px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .diagram-fullscreen svg {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .diagram-controls {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+      z-index: 10001;
+    }
+
+    .diagram-btn {
+      background: #000000;
+      color: #ffffff;
+      border: 2px solid #000000;
+      padding: 8px 16px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-family: "SuisseIntl-Medium", sans-serif;
+      font-size: 13px;
+      transition: all 0.3s ease;
+    }
+
+    .diagram-btn:hover {
+      background: #333333;
+      border-color: #333333;
+    }
+
+    .diagram-help {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.85);
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-family: "SuisseIntl-Regular", sans-serif;
+      z-index: 10001;
+      text-align: center;
+    }
+
+    .diagram-help kbd {
+      background: #ffffff;
+      color: #000000;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: monospace;
+      font-size: 11px;
+      margin: 0 2px;
+    }
+
+    /* Night mode for fullscreen diagrams */
+    body.night-mode .diagram-fullscreen {
+      background: #1a1a1a;
+    }
+
+    body.night-mode .diagram-fullscreen-content {
+      background: #2a2a2a;
+    }
+
+    body.night-mode .diagram-btn {
+      background: #ffffff;
+      color: #000000;
+      border-color: #ffffff;
+    }
+
+    body.night-mode .diagram-btn:hover {
+      background: #e0e0e0;
+      border-color: #e0e0e0;
+    }
+
+    .header {
+      border-bottom: 2px solid #000000;
+      padding-bottom: 20px;
+      margin-bottom: 30px;
+    }
+
+    .header h1 {
+      font-family: "SuisseIntl-Medium", sans-serif;
+      font-size: 28px;
+      font-weight: normal;
+      margin-bottom: 10px;
+      color: #000000;
+    }
+
+    .header .doc-path {
+      font-size: 12px;
+      color: #666666;
+      font-family: "Courier New", monospace;
+    }
+
+    .content {
+      padding: 20px 0;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 60px 20px;
+      color: #999999;
+      font-style: italic;
+    }
+
+    .error {
+      padding: 20px;
+      background: #ffe6e6;
+      border: 1px solid #d73a49;
+      border-radius: 3px;
+      color: #d73a49;
+      margin: 20px 0;
+    }
+
+    /* Markdown Content Styling */
+    .content h1 {
+      font-size: 26px;
+      font-weight: normal;
+      font-family: "SuisseIntl-Medium", sans-serif;
+      margin: 30px 0 16px 0;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #000000;
+      color: #000000;
+    }
+
+    .content h2 {
+      font-size: 22px;
+      font-weight: normal;
+      font-family: "SuisseIntl-Medium", sans-serif;
+      margin: 28px 0 14px 0;
+      color: #000000;
+      border-bottom: 1px solid #cccccc;
+      padding-bottom: 8px;
+    }
+
+    .content h3 {
+      font-size: 18px;
+      font-weight: normal;
+      font-family: "SuisseIntl-Medium", sans-serif;
+      margin: 24px 0 12px 0;
+      color: #000000;
+    }
+
+    .content h4,
+    .content h5,
+    .content h6 {
+      font-size: 16px;
+      font-weight: normal;
+      font-family: "SuisseIntl-Medium", sans-serif;
+      margin: 20px 0 10px 0;
+      color: #000000;
+    }
+
+    .content p {
+      margin: 0 0 16px 0;
+      color: #000000;
+    }
+
+    .content ul,
+    .content ol {
+      margin: 0 0 16px 0;
+      padding-left: 30px;
+    }
+
+    .content li {
+      margin-bottom: 8px;
+    }
+
+    .content code {
+      background: #f5f5f5;
+      padding: 3px 6px;
+      border-radius: 3px;
+      font-family: "Courier New", Monaco, monospace;
+      font-size: 13px;
+      color: #d73a49;
+      border: 1px solid #e0e0e0;
+    }
+
+    .content pre {
+      /* background: #f5f5f5;
+      border: 1px solid #e0e0e0; */
+      padding: 16px;
+      overflow-x: auto;
+      margin: 0 0 16px 0;
+      border-radius: 3px;
+      line-height: 1.5;
+    }
+
+    .content pre code {
+      background: none;
+      padding: 0;
+      color: #000000;
+      font-size: 13px;
+      border: none;
+    }
+
+    .content blockquote {
+      border-left: 4px solid #000000;
+      margin: 0 0 16px 0;
+      padding-left: 20px;
+      color: #666666;
+      font-style: italic;
+    }
+
+    .content a {
+      color: #0366d6;
+      text-decoration: none;
+    }
+
+    .content a:hover {
+      text-decoration: underline;
+    }
+
+    .content hr {
+      border: none;
+      border-top: 1px solid #e0e0e0;
+      margin: 30px 0;
+    }
+
+    .content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0 0 16px 0;
+      font-size: 13px;
+    }
+
+    .content table th,
+    .content table td {
+      border: 1px solid #e0e0e0;
+      padding: 10px;
+      text-align: left;
+    }
+
+    .content table th {
+      background: #f5f5f5;
+      font-family: "SuisseIntl-Medium", sans-serif;
+    }
+
+    .content img {
+      max-width: 100%;
+      height: auto;
+      margin: 16px 0;
+      border: 1px solid #e0e0e0;
+    }
+
+    /* Mermaid diagram styles */
+    .mermaid {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    body.night-mode .mermaid {
+      filter: invert(1) hue-rotate(180deg);
+    }
+
+    /* Responsive */
+    @media (max-width: 968px) {
+      .sidebar {
+        position: fixed;
+        left: -280px;
+        top: 0;
+        height: 100vh;
+        z-index: 999;
+        box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+        transition: left 0.3s ease;
+      }
+
+      .sidebar.open {
+        left: 0;
+      }
+
+      .sidebar-toggle {
+        display: block;
+      }
+
+      .main-content {
+        max-width: 100%;
+      }
+    }
+
+    /* Print styles */
+    @media print {
+      body {
+        display: block;
+      }
+
+      .sidebar,
+      .sidebar-toggle,
+      .theme-toggle {
+        display: none;
+      }
+
+      .main-content {
+        padding: 0;
+        max-width: none;
+      }
+      
+      .header {
+        page-break-after: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="sidebar-toggle" id="sidebarToggle">≡ Outline</button>
+  <button class="theme-toggle" id="themeToggle">Night Mode</button>
+  
+  <div class="layout-container">
+    <aside class="sidebar" id="sidebar">
+      <h2>Contents</h2>
+      <nav id="outline" class="outline">
+        <!-- Generated dynamically -->
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="header">
+        <h1 id="docTitle">Loading...</h1>
+        <div class="doc-path" id="docPath"></div>
+      </div>
+
+      <div class="content" id="content">
+        <div class="loading">Loading document...</div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    (function() {
+      'use strict';
+
+      // Initialize Mermaid
+      if (typeof mermaid !== 'undefined') {
+        mermaid.initialize({ 
+          startOnLoad: false,
+          theme: 'default',
+          securityLevel: 'loose'
+        });
+      }
+
+      // Theme management
+      function initTheme() {
+        const savedTheme = localStorage.getItem('docs-theme');
+        const themeToggle = document.getElementById('themeToggle');
+        
+        if (savedTheme === 'night') {
+          document.body.classList.add('night-mode');
+          themeToggle.textContent = 'Day Mode';
+        }
+
+        themeToggle.addEventListener('click', function() {
+          document.body.classList.toggle('night-mode');
+          const isNightMode = document.body.classList.contains('night-mode');
+          
+          if (isNightMode) {
+            localStorage.setItem('docs-theme', 'night');
+            themeToggle.textContent = 'Day Mode';
+          } else {
+            localStorage.setItem('docs-theme', 'day');
+            themeToggle.textContent = 'Night Mode';
+          }
+        });
+      }
+
+      // Configure marked.js
+      if (typeof marked !== 'undefined') {
+        marked.setOptions({
+          breaks: true,
+          gfm: true,
+          headerIds: true,
+          mangle: false
+        });
+      }
+
+      // Get URL parameters
+      function getUrlParameter(name) {
+        const params = new URLSearchParams(window.location.search);
+        return params.get(name);
+      }
+
+      // Generate slug ID from text (GitHub-style)
+      function generateSlug(text) {
+        return text
+          .toLowerCase()
+          .trim()
+          .replace(/[^\w\s-]/g, '') // Remove special characters
+          .replace(/[\s_]+/g, '-')   // Replace spaces and underscores with hyphens
+          .replace(/^-+|-+$/g, '');  // Remove leading/trailing hyphens
+      }
+
+      // Add IDs to all headers in content
+      function addHeaderIds() {
+        const content = document.getElementById('content');
+        const headers = content.querySelectorAll('h1, h2, h3, h4, h5, h6');
+        
+        headers.forEach(function(header) {
+          if (!header.id) {
+            const slug = generateSlug(header.textContent);
+            if (slug) {
+              header.id = slug;
+            }
+          }
+        });
+      }
+
+      // Generate outline/table of contents from headers
+      function generateOutline() {
+        const content = document.getElementById('content');
+        const outline = document.getElementById('outline');
+        const headers = content.querySelectorAll('h2, h3, h4');
+        
+        outline.innerHTML = '';
+        
+        if (headers.length === 0) {
+          outline.innerHTML = '<div style="color: #999; font-size: 12px; padding: 12px;">No sections found</div>';
+          return;
+        }
+        
+        headers.forEach(function(header) {
+          if (!header.id) return;
+          
+          const level = parseInt(header.tagName.substring(1)); // h2 -> 2, h3 -> 3
+          const item = document.createElement('div');
+          item.className = 'outline-item level-' + level;
+          
+          const link = document.createElement('a');
+          link.href = '#' + header.id;
+          link.textContent = header.textContent;
+          link.dataset.target = header.id;
+          
+          // Add smooth scroll on click
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetElement = document.getElementById(header.id);
+            if (targetElement) {
+              targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              // Update URL hash
+              if (history.pushState) {
+                history.pushState(null, null, '#' + header.id);
+              }
+              // Close sidebar on mobile after navigation
+              if (window.innerWidth <= 968) {
+                document.getElementById('sidebar').classList.remove('open');
+              }
+            }
+          });
+          
+          item.appendChild(link);
+          outline.appendChild(item);
+        });
+      }
+
+      // Update active outline item based on scroll position
+      function updateActiveOutlineItem() {
+        const content = document.getElementById('content');
+        const headers = content.querySelectorAll('h2[id], h3[id], h4[id]');
+        const outlineItems = document.querySelectorAll('.outline-item');
+        
+        let activeHeader = null;
+        const scrollPos = window.scrollY + 100; // Offset for better UX
+        
+        // Find the current section
+        headers.forEach(function(header) {
+          if (header.offsetTop <= scrollPos) {
+            activeHeader = header;
+          }
+        });
+        
+        // Update outline items
+        outlineItems.forEach(function(item) {
+          const link = item.querySelector('a');
+          if (activeHeader && link.dataset.target === activeHeader.id) {
+            item.classList.add('active');
+          } else {
+            item.classList.remove('active');
+          }
+        });
+      }
+
+      // Sidebar toggle for mobile
+      function initSidebarToggle() {
+        const toggle = document.getElementById('sidebarToggle');
+        const sidebar = document.getElementById('sidebar');
+        
+        toggle.addEventListener('click', function() {
+          sidebar.classList.toggle('open');
+        });
+        
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(e) {
+          if (window.innerWidth <= 968) {
+            if (!sidebar.contains(e.target) && !toggle.contains(e.target)) {
+              sidebar.classList.remove('open');
+            }
+          }
+        });
+      }
+
+      // Intercept clicks on markdown links
+      function interceptMarkdownLinks(currentDocPath) {
+        const content = document.getElementById('content');
+        
+        content.addEventListener('click', function(e) {
+          const target = e.target.closest('a');
+          if (!target || !target.href) return;
+          
+          const href = target.getAttribute('href');
+          
+          // Handle anchor links (same page navigation)
+          if (href.startsWith('#')) {
+            e.preventDefault();
+            const targetId = href.substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+              targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              // Update URL hash without triggering navigation
+              if (history.pushState) {
+                const newUrl = window.location.pathname + window.location.search + href;
+                history.pushState(null, null, newUrl);
+              }
+            }
+            return;
+          }
+          
+          // Skip external links (http:// or https://)
+          if (href.startsWith('http://') || href.startsWith('https://')) {
+            return;
+          }
+          
+          // Handle markdown file links
+          if (href.endsWith('.md')) {
+            e.preventDefault();
+            
+            // Resolve the relative path based on current document location
+            const newDocPath = resolveRelativePath(currentDocPath, href);
+            
+            // Extract title from link text or use filename
+            const title = target.textContent.trim() || 
+                         newDocPath.split('/').pop().replace('.md', '');
+            
+            // Navigate to the new document through the viewer
+            window.location.href = 'docs-viewer.html?doc=' + 
+                                 encodeURIComponent(newDocPath) + 
+                                 '&title=' + encodeURIComponent(title);
+          }
+        });
+      }
+
+      // Resolve relative path based on current document location
+      function resolveRelativePath(currentPath, relativePath) {
+        // Get the directory of the current document
+        const currentDir = currentPath.substring(0, currentPath.lastIndexOf('/'));
+        
+        // Start from current directory
+        let pathParts = currentDir ? currentDir.split('/') : [];
+        const relParts = relativePath.split('/');
+        
+        // Process each part of the relative path
+        for (let i = 0; i < relParts.length; i++) {
+          if (relParts[i] === '..') {
+            // Go up one directory
+            pathParts.pop();
+          } else if (relParts[i] !== '.' && relParts[i] !== '') {
+            // Add directory or file
+            pathParts.push(relParts[i]);
+          }
+        }
+        
+        return pathParts.join('/');
+      }
+
+      // Load and render the markdown document
+      function loadDocument() {
+        const docPath = getUrlParameter('doc');
+        const docTitle = getUrlParameter('title') || 'Documentation';
+        
+        // Update page title and header
+        document.title = docTitle + ' - Documentation';
+        document.getElementById('docTitle').textContent = docTitle;
+        document.getElementById('docPath').textContent = docPath || '';
+
+        if (!docPath) {
+          document.getElementById('content').innerHTML = 
+            '<div class="error">Error: No document path specified.</div>';
+          return;
+        }
+
+        // Fetch the markdown file
+        fetch(docPath)
+          .then(function(response) {
+            if (!response.ok) {
+              throw new Error('Failed to load document: ' + response.statusText);
+            }
+            return response.text();
+          })
+          .then(function(markdown) {
+            // Render markdown to HTML
+            let html;
+            if (typeof marked !== 'undefined') {
+              html = marked.parse(markdown);
+            } else {
+              // Fallback if marked.js is not loaded
+              html = '<pre>' + escapeHtml(markdown) + '</pre>';
+            }
+            
+            document.getElementById('content').innerHTML = html;
+            
+            // Add IDs to all headers (marked.js might not be doing this automatically)
+            addHeaderIds();
+            
+            // Generate outline in sidebar
+            generateOutline();
+            
+            // Intercept markdown links and handle them properly
+            interceptMarkdownLinks(docPath);
+            
+            // Set up scroll tracking for active section highlighting
+            window.addEventListener('scroll', updateActiveOutlineItem);
+            updateActiveOutlineItem(); // Initial update
+            
+            // Render Mermaid diagrams after content is loaded
+            if (typeof mermaid !== 'undefined') {
+              mermaid.run({
+                querySelector: '.language-mermaid, .mermaid'
+              }).then(function() {
+                // After Mermaid renders, make diagrams interactive
+                makeDiagramsInteractive();
+              }).catch(function(error) {
+                console.error('Mermaid rendering error:', error);
+              });
+            }
+            
+            // Scroll to anchor if hash is present in URL
+            setTimeout(function() {
+              if (window.location.hash) {
+                const targetId = window.location.hash.substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                  targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }
+            }, 100); // Small delay to ensure rendering is complete
+          })
+          .catch(function(error) {
+            console.error('Error loading document:', error);
+            document.getElementById('content').innerHTML = 
+              '<div class="error">Error loading document: ' + error.message + '</div>';
+          });
+      }
+
+      // Make Mermaid diagrams interactive with pan/zoom
+      function makeDiagramsInteractive() {
+        if (typeof svgPanZoom === 'undefined') {
+          console.warn('svg-pan-zoom library not loaded');
+          return;
+        }
+
+        const mermaidDivs = document.querySelectorAll('.mermaid, .language-mermaid');
+        
+        mermaidDivs.forEach(function(div) {
+          const svg = div.querySelector('svg');
+          if (!svg || svg.dataset.interactive) return;
+          
+          svg.dataset.interactive = 'true';
+          
+          // Wrap in container for better control
+          const container = document.createElement('div');
+          container.className = 'mermaid-container';
+          div.parentNode.insertBefore(container, div);
+          container.appendChild(div);
+          
+          // Add hint
+          const hint = document.createElement('div');
+          hint.className = 'diagram-hint';
+          hint.textContent = 'Click to view fullscreen';
+          container.appendChild(hint);
+          
+          // Initialize basic pan/zoom for inline view
+          const panZoom = svgPanZoom(svg, {
+            zoomEnabled: true,
+            controlIconsEnabled: false,
+            fit: true,
+            center: true,
+            minZoom: 0.5,
+            maxZoom: 10,
+            zoomScaleSensitivity: 0.3
+          });
+          
+          // Click to enter fullscreen
+          container.addEventListener('click', function() {
+            openDiagramFullscreen(svg, panZoom);
+          });
+        });
+      }
+
+      // Open diagram in fullscreen mode
+      function openDiagramFullscreen(originalSvg, originalPanZoom) {
+        // Create fullscreen modal if it doesn't exist
+        let modal = document.getElementById('diagramFullscreen');
+        if (!modal) {
+          modal = document.createElement('div');
+          modal.id = 'diagramFullscreen';
+          modal.className = 'diagram-fullscreen';
+          modal.innerHTML = `
+            <div class="diagram-controls">
+              <button class="diagram-btn" id="diagramZoomIn">Zoom In</button>
+              <button class="diagram-btn" id="diagramZoomOut">Zoom Out</button>
+              <button class="diagram-btn" id="diagramReset">Reset</button>
+              <button class="diagram-btn" id="diagramClose">Close</button>
+            </div>
+            <div class="diagram-help">
+              <kbd>Scroll</kbd> to zoom • <kbd>Click+Drag</kbd> to pan • <kbd>Esc</kbd> to close
+            </div>
+            <div class="diagram-fullscreen-content" id="diagramContent"></div>
+          `;
+          document.body.appendChild(modal);
+          
+          // Close button
+          document.getElementById('diagramClose').addEventListener('click', closeDiagramFullscreen);
+          
+          // ESC key to close
+          document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+              closeDiagramFullscreen();
+            }
+          });
+          
+          // Click outside to close
+          modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+              closeDiagramFullscreen();
+            }
+          });
+        }
+        
+        // Clone the SVG
+        const content = document.getElementById('diagramContent');
+        content.innerHTML = '';
+        const svgClone = originalSvg.cloneNode(true);
+        svgClone.removeAttribute('data-interactive');
+        
+        // Remove size constraints to allow fullscreen expansion
+        svgClone.removeAttribute('width');
+        svgClone.removeAttribute('height');
+        svgClone.style.width = '100%';
+        svgClone.style.height = '100%';
+        
+        content.appendChild(svgClone);
+        
+        // Show modal
+        modal.classList.add('active');
+        
+        // Initialize enhanced pan/zoom for fullscreen
+        setTimeout(function() {
+          const fullscreenPanZoom = svgPanZoom(svgClone, {
+            zoomEnabled: true,
+            controlIconsEnabled: false,
+            fit: true,
+            center: true,
+            minZoom: 0.1,
+            maxZoom: 20,
+            zoomScaleSensitivity: 0.2,
+            mouseWheelZoomEnabled: true,
+            contain: false,
+            refreshRate: 'auto'
+          });
+          
+          // Store reference for controls
+          modal.panZoomInstance = fullscreenPanZoom;
+          
+          // Control buttons
+          document.getElementById('diagramZoomIn').onclick = function() {
+            fullscreenPanZoom.zoomIn();
+          };
+          
+          document.getElementById('diagramZoomOut').onclick = function() {
+            fullscreenPanZoom.zoomOut();
+          };
+          
+          document.getElementById('diagramReset').onclick = function() {
+            fullscreenPanZoom.reset();
+            fullscreenPanZoom.fit();
+            fullscreenPanZoom.center();
+          };
+        }, 100);
+      }
+
+      function closeDiagramFullscreen() {
+        const modal = document.getElementById('diagramFullscreen');
+        if (modal) {
+          modal.classList.remove('active');
+          if (modal.panZoomInstance) {
+            modal.panZoomInstance.destroy();
+            modal.panZoomInstance = null;
+          }
+        }
+      }
+
+      // Utility function to escape HTML
+      function escapeHtml(text) {
+        const map = {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#039;'
+        };
+        return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+      }
+
+      // Initialize when DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+          initTheme();
+          initSidebarToggle();
+          loadDocument();
+        });
+      } else {
+        initTheme();
+        initSidebarToggle();
+        loadDocument();
+      }
+    })();
+  </script>
+</body>
+</html>
