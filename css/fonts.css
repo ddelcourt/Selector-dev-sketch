@@ -19,3 +19,11 @@
   src: url("fonts/SuisseIntl-Medium-WebXL.woff") format("woff"),
     url("fonts/SuisseIntl-Medium-WebXL.woff2") format("woff2");
 }
+
+@font-face {
+  font-family: "Big Shoulders Display";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("fonts/BigShouldersDisplay-Variable.woff2") format("woff2");
+}

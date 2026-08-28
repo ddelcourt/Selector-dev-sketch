@@ -7,6 +7,24 @@ html {
   box-sizing: inherit;
 }
 
+/* Pulse Effect Overlay */
+#pulseContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 500;
+}
+
+.pulse-circle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
 body {
   background-color: hsl(0, 0%, 14%);
   margin: 0;
@@ -33,7 +51,7 @@ body {
   margin: 0 0 32px 0;
   border-radius: 5px;
   box-sizing: border-box;
-  overflow: hidden;
+  /* overflow: hidden; */
   position: relative;
 }
 
@@ -357,7 +375,7 @@ input {
 .button {
   display: block;
   background-color: rgba(255, 255, 255, 0.95);
-  border: 1px solid #979797;
+  border: 1px solid hsla(0 0% 0% / 0.25);
   border-radius: 8px;
   box-sizing: border-box;
   cursor: pointer;
@@ -679,7 +697,6 @@ input {
   pointer-events: none;
   display: none;
   overflow: hidden;
-  border: 1px solid red;
 }
 
 /* ------ Physics Toggle Button ---------- */
@@ -698,7 +715,7 @@ main {
   width: 100%;
   max-width: 600px;
   box-sizing: border-box;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
   margin: 0 auto;
 }
 
