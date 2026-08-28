@@ -78,13 +78,14 @@ graph TD
     end
     
     subgraph "DecisionTree Core API"
+        TREE_INIT
         TREE_INIT --> GET_CHOICE[getChoice id]
-        TREE_INIT --> GET_CHILDREN[getChildren parentId]
-        TREE_INIT --> GET_PARENTS[getParents id]
-        TREE_INIT --> GET_PARENT_IDS[getParentIds id]
-        TREE_INIT --> GET_PARENT_NAME[getParentName id]
-        TREE_INIT --> GET_INITIAL[getInitial]
-        TREE_INIT --> GET_CHILD_COUNT[getChildCount parentId]
+        GET_CHOICE --> GET_CHILDREN[getChildren parentId]
+        GET_CHILDREN --> GET_PARENTS[getParents id]
+        GET_PARENTS --> GET_PARENT_IDS[getParentIds id]
+        GET_PARENT_IDS --> GET_PARENT_NAME[getParentName id]
+        GET_PARENT_NAME --> GET_INITIAL[getInitial]
+        GET_INITIAL --> GET_CHILD_COUNT[getChildCount parentId]
     end
     
     subgraph "User Interaction Flow"
@@ -280,6 +281,158 @@ graph TD
 - **Choice Selection**: User click → Add to history → Trigger ball → Render next choices
 - **Physics Update**: beforeUpdate → Engine.update → afterUpdate → Render → afterRender (60 times/sec)
 - **Mode Transitions**: End of tree → Normal (3s) → Reversed (2s) → Zero Gravity (perpetual)
+
+### User Stories & Interaction Flows
+
+Complete user journey map showing all interaction scenarios:
+
+```mermaid
+graph TD
+    START([User Arrives at Application]) --> LOAD{Page Loads}
+    LOAD --> INIT[Application Initializes]
+    INIT --> READY[Ready State: Initial Question Displayed]
+    
+    READY --> MAIN_CHOICE{User Action?}
+    
+    %% Primary Flow: Making Choices
+    MAIN_CHOICE -->|Click Choice Button| CHOICE_FLOW[Choice Selection Flow]
+    CHOICE_FLOW --> HAS_CHILDREN{Choice Has Children?}
+    
+    HAS_CHILDREN -->|Yes - Branch Node| ADD_BALL[Ball Appears in Physics World]
+    ADD_BALL --> WATCH_PHYSICS[User Watches Ball Physics]
+    WATCH_PHYSICS --> NEXT_QUESTION[Next Level Questions Appear]
+    NEXT_QUESTION --> CONTINUE_CHOICE{Continue?}
+    CONTINUE_CHOICE -->|Yes| CHOICE_FLOW
+    
+    HAS_CHILDREN -->|No - Leaf Node| END_FLOW[Reached End of Tree]
+    END_FLOW --> GRAVITY_SHOW[Gravity Sequence Begins]
+    GRAVITY_SHOW --> NORMAL_G[Normal Gravity - 3 seconds]
+    NORMAL_G --> REVERSE_G[Reverse Gravity - 2 seconds]
+    REVERSE_G --> ZERO_G[Zero Gravity - Perpetual]
+    ZERO_G --> RESULT[User Sees Final Result]
+    RESULT --> END_ACTIONS{What Next?}
+    
+    %% Navigation Actions
+    MAIN_CHOICE -->|Click Back Button| GO_BACK[Navigate to Previous Choice]
+    GO_BACK --> REMOVE_BALL[Last Ball Removed - Sin Hole Effect]
+    REMOVE_BALL --> PREV_QUESTION[Previous Question Restored]
+    PREV_QUESTION --> MAIN_CHOICE
+    
+    MAIN_CHOICE -->|Click Restart Button| RESTART[Clear All State]
+    RESTART --> CLEAR_PHYSICS[Remove All Balls]
+    CLEAR_PHYSICS --> RESET_TO_START[Return to Initial Question]
+    RESET_TO_START --> READY
+    
+    END_ACTIONS -->|Restart| RESTART
+    END_ACTIONS -->|Back| GO_BACK
+    END_ACTIONS -->|Stay & Observe| ZERO_G
+    
+    %% Physics Controls
+    MAIN_CHOICE -->|Adjust Physics Slider| PHYSICS_ADJUST[Modify Physics Parameters]
+    PHYSICS_ADJUST --> PARAM_OPTIONS{Which Parameter?}
+    PARAM_OPTIONS -->|Ball Size| CHANGE_SIZE[Ball Radius Changes]
+    PARAM_OPTIONS -->|Velocity| CHANGE_VEL[Launch Speed Changes]
+    PARAM_OPTIONS -->|Bounciness| CHANGE_BOUNCE[Restitution Changes]
+    PARAM_OPTIONS -->|Friction| CHANGE_FRICTION[Friction Changes]
+    PARAM_OPTIONS -->|Gravity| CHANGE_GRAVITY[Gravity Strength Changes]
+    PARAM_OPTIONS -->|Text Size| CHANGE_TEXT[Text Scale Changes]
+    
+    CHANGE_SIZE --> APPLY_PHYSICS[Changes Apply Immediately]
+    CHANGE_VEL --> APPLY_PHYSICS
+    CHANGE_BOUNCE --> APPLY_PHYSICS
+    CHANGE_FRICTION --> APPLY_PHYSICS
+    CHANGE_GRAVITY --> APPLY_PHYSICS
+    CHANGE_TEXT --> APPLY_PHYSICS
+    APPLY_PHYSICS --> SAVE_LOCAL[Saved to localStorage]
+    SAVE_LOCAL --> MAIN_CHOICE
+    
+    %% Configuration Management
+    MAIN_CHOICE -->|Click Export Button| EXPORT[Export Configuration]
+    EXPORT --> DOWNLOAD_JSON[Download physics-config.json]
+    DOWNLOAD_JSON --> MAIN_CHOICE
+    
+    MAIN_CHOICE -->|Click Import Button| IMPORT[Import Configuration]
+    IMPORT --> SELECT_FILE[User Selects JSON File]
+    SELECT_FILE --> LOAD_CONFIG[Configuration Loaded]
+    LOAD_CONFIG --> APPLY_ALL[All Parameters Updated]
+    APPLY_ALL --> MAIN_CHOICE
+    
+    %% Keyboard Shortcuts & View Controls
+    MAIN_CHOICE -->|Press Enter Key| TOGGLE_FULL[Toggle Fullscreen Mode]
+    TOGGLE_FULL --> FULLSCREEN_STATE{Current State?}
+    FULLSCREEN_STATE -->|Normal| ENTER_FULL[Enter Fullscreen]
+    FULLSCREEN_STATE -->|Fullscreen| EXIT_FULL[Exit Fullscreen]
+    ENTER_FULL --> MAIN_CHOICE
+    EXIT_FULL --> MAIN_CHOICE
+    
+    MAIN_CHOICE -->|Press Tab Key| TOGGLE_PANELS[Toggle Control Panels]
+    TOGGLE_PANELS --> PANEL_STATE{Current State?}
+    PANEL_STATE -->|Visible| HIDE_PANELS[Hide All Panels]
+    PANEL_STATE -->|Hidden| SHOW_PANELS[Show All Panels]
+    HIDE_PANELS --> MAIN_CHOICE
+    SHOW_PANELS --> MAIN_CHOICE
+    
+    %% Documentation Access
+    MAIN_CHOICE -->|Click Docs Button| OPEN_DOCS[Open Documentation Panel]
+    OPEN_DOCS --> DOCS_LIST[View Documentation List]
+    DOCS_LIST --> SELECT_DOC{Select Document?}
+    SELECT_DOC -->|Yes| VIEW_DOC[Open in New Tab]
+    SELECT_DOC -->|No| CLOSE_DOCS[Close Panel]
+    VIEW_DOC --> READ_DOCS[Reading Documentation]
+    READ_DOCS --> DOCS_ACTIONS{User Action?}
+    DOCS_ACTIONS -->|Navigate Links| VIEW_DOC
+    DOCS_ACTIONS -->|Toggle Night Mode| THEME_SWITCH[Switch Theme]
+    DOCS_ACTIONS -->|Click Diagram| DIAGRAM_FULL[View Diagram Fullscreen]
+    DIAGRAM_FULL --> PAN_ZOOM[Pan & Zoom Diagram]
+    PAN_ZOOM --> EXPLORE[Explore Details]
+    EXPLORE --> CLOSE_DIAGRAM[Close Fullscreen]
+    CLOSE_DIAGRAM --> READ_DOCS
+    THEME_SWITCH --> READ_DOCS
+    DOCS_ACTIONS -->|Return to App| CLOSE_DOCS
+    CLOSE_DOCS --> MAIN_CHOICE
+    
+    %% Window Events
+    MAIN_CHOICE -->|Browser Resize| RESIZE_HANDLE[Window Resize Event]
+    RESIZE_HANDLE --> ADJUST_CANVAS[Canvas Resizes]
+    ADJUST_CANVAS --> REPOSITION_BALLS[Balls Repositioned]
+    REPOSITION_BALLS --> CONSTRAIN[Constrained to New Bounds]
+    CONSTRAIN --> MAIN_CHOICE
+    
+    %% Error States
+    CHOICE_FLOW -.Error.-> ERROR_STATE[Error Occurred]
+    PHYSICS_ADJUST -.Error.-> ERROR_STATE
+    IMPORT -.Invalid File.-> ERROR_STATE
+    ERROR_STATE --> ERROR_DISPLAY[Error Message Displayed]
+    ERROR_DISPLAY --> RECOVER[User Acknowledges]
+    RECOVER --> MAIN_CHOICE
+    
+    style START fill:#90EE90
+    style READY fill:#87CEEB
+    style END_FLOW fill:#FFD700
+    style RESULT fill:#FFD700
+    style ZERO_G fill:#E6E6FA
+    style APPLY_PHYSICS fill:#FFA500
+    style SAVE_LOCAL fill:#98FB98
+    style ERROR_STATE fill:#FF6B6B
+    style EXPLORE fill:#87CEEB
+```
+
+**User Story Categories:**
+
+1. **Primary Journey** (Green/Blue path): First-time user making choices → Seeing balls → Reaching conclusion
+2. **Navigation** (Yellow): Back button navigation, restart flow
+3. **Customization** (Orange): Physics parameter adjustment, configuration management
+4. **View Control** (Purple): Fullscreen toggle, panel visibility, window resize
+5. **Learning** (Cyan): Documentation access, diagram exploration
+6. **Error Handling** (Red): Error states and recovery
+
+**Key User Personas:**
+
+- **Explorer**: Focuses on trying different choice paths, uses back/restart frequently
+- **Tinkerer**: Adjusts physics parameters, exports/imports configurations
+- **Learner**: Reads documentation, explores diagrams, understands system
+- **Casual User**: Makes choices linearly, minimal customization
+- **Visual Observer**: Watches physics animations, enters fullscreen for immersion
 
 ### Technology Stack
 
