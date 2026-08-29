@@ -1,0 +1,23 @@
+{
+  "name": "Chaotic",
+  "description": "High energy, extreme bouncing and large balls",
+  "ballSizePercent": 0.1,
+  "velocityX": {
+    "min": -25,
+    "max": 25
+  },
+  "velocityY": {
+    "min": 10,
+    "max": 15
+  },
+  "bounciness": 1.5,
+  "friction": 0.01,
+  "gravity": 1.2,
+  "textSizeFactor": 0.18,
+  "allCaps": true,
+  "whiteText": false,
+  "velocityThreshold": 0.005,
+  "enableWindowShake": true,
+  "enablePulseEffect": true,
+  "randomTopBottom": true
+}

@@ -1,0 +1,23 @@
+{
+  "name": "Default",
+  "description": "Standard balanced physics settings",
+  "ballSizePercent": 0.06,
+  "velocityX": {
+    "min": -20,
+    "max": 20
+  },
+  "velocityY": {
+    "min": 8.5,
+    "max": 10
+  },
+  "bounciness": 1,
+  "friction": 0.05,
+  "gravity": 1,
+  "textSizeFactor": 0.22,
+  "allCaps": true,
+  "whiteText": false,
+  "velocityThreshold": 0.01,
+  "enableWindowShake": true,
+  "enablePulseEffect": true,
+  "randomTopBottom": true
+}

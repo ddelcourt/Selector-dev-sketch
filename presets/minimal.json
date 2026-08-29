@@ -1,0 +1,23 @@
+{
+  "name": "Minimal",
+  "description": "Tiny balls, subtle effects, minimal visual noise",
+  "ballSizePercent": 0.02,
+  "velocityX": {
+    "min": -15,
+    "max": 15
+  },
+  "velocityY": {
+    "min": 7,
+    "max": 9
+  },
+  "bounciness": 0.8,
+  "friction": 0.08,
+  "gravity": 1,
+  "textSizeFactor": 0.25,
+  "allCaps": false,
+  "whiteText": true,
+  "velocityThreshold": 0.02,
+  "enableWindowShake": false,
+  "enablePulseEffect": false,
+  "randomTopBottom": false
+}

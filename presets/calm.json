@@ -1,0 +1,23 @@
+{
+  "name": "Calm",
+  "description": "Gentle, slower physics with reduced effects",
+  "ballSizePercent": 0.04,
+  "velocityX": {
+    "min": -10,
+    "max": 10
+  },
+  "velocityY": {
+    "min": 5,
+    "max": 7
+  },
+  "bounciness": 0.6,
+  "friction": 0.1,
+  "gravity": 0.8,
+  "textSizeFactor": 0.22,
+  "allCaps": true,
+  "whiteText": false,
+  "velocityThreshold": 0.05,
+  "enableWindowShake": false,
+  "enablePulseEffect": true,
+  "randomTopBottom": false
+}

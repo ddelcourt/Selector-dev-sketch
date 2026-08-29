@@ -5,6 +5,7 @@
   top: 20px;
   right: 20px;
   width: 280px;
+  max-height: calc(100vh - 40px);
   background: #ffffff;
   border: 1px solid #000000;
   border-radius: 0;
@@ -15,6 +16,33 @@
   transform: translateY(0);
   transition: none;
   box-shadow: none;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Scrollbar styling for the control panel */
+.physics-controls::-webkit-scrollbar {
+  width: 8px;
+}
+
+.physics-controls::-webkit-scrollbar-track {
+  background: #f5f5f5;
+  border-left: 1px solid #e0e0e0;
+}
+
+.physics-controls::-webkit-scrollbar-thumb {
+  background: #000000;
+  border-radius: 0;
+}
+
+.physics-controls::-webkit-scrollbar-thumb:hover {
+  background: #333333;
+}
+
+/* Firefox scrollbar */
+.physics-controls {
+  scrollbar-width: thin;
+  scrollbar-color: #000000 #f5f5f5;
 }
 
 /* Hidden state using class instead of inline display */
@@ -273,7 +301,8 @@ input[type="range"]::-moz-range-thumb:active {
 .reset-button {
   width: 100%;
   padding: 7px 9px;
-  margin-top: 14px;
+  margin-top: 7px;
+  margin-bottom: 14px;
   background: #ffffff;
   border: 1px solid #000000;
   border-radius: 0;
@@ -300,7 +329,7 @@ input[type="range"]::-moz-range-thumb:active {
 .export-button {
   width: 100%;
   padding: 7px 9px;
-  margin-top: 7px;
+  margin-top: 14px;
   background: #ffffff;
   border: 1px solid #000000;
   border-radius: 0;
@@ -320,6 +349,59 @@ input[type="range"]::-moz-range-thumb:active {
 }
 
 .export-button:active {
+  transform: none;
+}
+
+/* Preset Selector */
+.preset-selector {
+  width: 100%;
+  padding: 6px 8px;
+  background: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 0;
+  color: #000000;
+  font-size: 11px;
+  font-family: "SuisseIntl-Regular", sans-serif;
+  cursor: pointer;
+  transition: none;
+  margin-top: 5px;
+}
+
+.preset-selector:hover {
+  background: #f5f5f5;
+}
+
+.preset-selector:focus {
+  outline: 2px solid #000000;
+  outline-offset: -2px;
+}
+
+/* Upload Button */
+.upload-button {
+  display: block;
+  width: 100%;
+  padding: 7px 9px;
+  margin-top: 5px;
+  background: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 0;
+  color: #000000;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: none;
+  font-family: "SuisseIntl-Regular", sans-serif;
+  text-align: center;
+}
+
+.upload-button:hover {
+  background: #000000;
+  color: #ffffff;
+  border-color: #000000;
+}
+
+.upload-button:active {
   transform: none;
 }
 
@@ -346,6 +428,7 @@ input[type="range"]::-moz-range-thumb:active {
     left: 10px;
     width: auto;
     max-width: calc(100vw - 20px);
+    max-height: calc(100vh - 20px);
     box-sizing: border-box;
     padding: 10px;
   }
@@ -385,6 +468,7 @@ input[type="range"]::-moz-range-thumb:active {
     right: 5px;
     left: 5px;
     max-width: calc(100vw - 10px);
+    max-height: calc(100vh - 10px);
     padding: 8px;
     font-size: 9px;
   }
